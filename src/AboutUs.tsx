@@ -68,7 +68,7 @@ export default function AboutUs() {
         </div>
         <div className="pt-[50px] md:pt-[100px]">
           <p className="text-[#0056B3] font-[Poppins] text-center text-[22px] md:text-[40px] leading-[32px] font-sembibold pb-[60px]">
-            PARA ADVOKAT & KONSULTAN HUKUM
+            PARA ADVOKAT & KONSULTAN HUKUMs
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 m-auto">
             <div>
