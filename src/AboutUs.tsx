@@ -4,11 +4,6 @@ import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import FooterComponent from "./components/Footer";
 import img1 from "./assets/cardheader.svg";
-import img2 from "./assets/2.svg";
-import img3 from "./assets/3.svg";
-import img4 from "./assets/4.svg";
-import img5 from "./assets/5.svg";
-import img6 from "./assets/6.svg";
 import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -22,14 +17,16 @@ type AboutData = {
   section_1_title: string;
   section_1_desc: string;
   section_1_url_image: string;
+  section_advokat_1: string; // Added this field
 };
 
 type DataAdvokat = {
   name: string;
   desc: string;
   url_images: string;
-  section_advokat_1:string;
-};
+  section_advokat_1: string;
+}[];  // Changed to array type
+
 export default function AboutUs() {
   const [bannerData, setBannerData] = useState<BannerData>();
   const [aboutData, setAboutData] = useState<AboutData>();
@@ -47,7 +44,7 @@ export default function AboutUs() {
       .then(function (response) {
         console.log(response.data.data);
         if (response.data && response.data.data) {
-          const dt = response.data.data.filter((el) => el.type === "about");
+          const dt = response.data.data.filter((el: { type: string; }) => el.type === "about");
           setBannerData(dt[0]);
         }
       })
@@ -109,6 +106,8 @@ export default function AboutUs() {
       });
   }, []);
 
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
   return (
     <>
       <Helmet>

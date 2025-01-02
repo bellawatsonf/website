@@ -12,25 +12,30 @@ type BannerData = {
   desc: string;
   title: string;
 };
+
 type HomeData = {
   visi: string;
   misi: string;
-  grid2_title:string;
-  grid1_title:string;
-};
-
-type FirstGrid = {
-  title: string;
-  description: string;
+  grid2_title: string;
   grid1_title: string;
-  grid2_title:string;
 };
 
-type PortoClient ={
-  name:string;
-  desc:string;
-  url_image:string;
+type GridItem = {
+  title: string;
+  description: string[];
+  position: number;
 }
+
+type FirstGrid = GridItem[];
+
+type PortoClient = {
+  name: string;
+  desc: string;
+  url_image: string;
+};
+
+
+
 export default function Home() {
   const [bannerData, setBannerData] = useState<BannerData>();
   const [homeData, setHomeData] = useState<HomeData>();
@@ -50,7 +55,7 @@ export default function Home() {
       .then(function (response) {
         console.log(response.data.data);
         if (response.data && response.data.data) {
-          const dt = response.data.data.filter((el) => el.type === "home");
+          const dt = response.data.data.filter((el: { type: string; }) => el.type === "home");
           setBannerData(dt[0]);
         }
       })
@@ -93,7 +98,7 @@ export default function Home() {
       })
       .then(function (response) {
         console.log(response.data.data, "pp");
-        let data = response.data.data.sort((a, b) => a.position - b.position);
+       const data = response.data.data.sort((a:GridItem, b:GridItem) => a.position - b.position);
         console.log(data, "dg");
         setFirstGrid(data);
       })
@@ -115,7 +120,7 @@ export default function Home() {
       })
       .then(function (response) {
         console.log(response.data.data, "psp");
-        let data = response.data.data[0];
+        const data = response.data.data[0];
         setPortoClient(data);
       })
       .catch(function (error) {
@@ -419,7 +424,7 @@ export default function Home() {
                   </p>
                   <p className="text-[#000000] text-[14px] md:text-[16px] font-normal leading-[140%] pb-[35px]">
                     <ul>
-                      {el.description.map((item: any) => {
+                      {el.description.map((item) => {
                         return <li>{item}</li>;
                       })}
                     </ul>

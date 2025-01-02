@@ -55,7 +55,7 @@ export default function ContactUs() {
       .then(function (response) {
         console.log(response.data.data);
         if (response.data && response.data.data) {
-          const dt = response.data.data.filter((el) => el.type === "contact");
+          const dt = response.data.data.filter((el: { type: string; }) => el.type === "contact");
           setBannerData(dt[0]);
         }
       })
@@ -92,6 +92,9 @@ export default function ContactUs() {
         setLoading(false);
       });
   }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
   return (
     <>
       <Helmet>

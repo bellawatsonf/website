@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import img from "../assets/logo.svg";
 import axios from "axios";
 
 type FooterData = {
