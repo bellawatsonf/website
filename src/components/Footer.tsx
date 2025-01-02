@@ -1,6 +1,43 @@
+import { useEffect, useState } from "react";
 import img from "../assets/logo.svg";
+import axios from "axios";
 
+type FooterData = {
+  desc: string;
+  title: string;
+};
 export default function FooterComponent() {
+  const [footer, setFooter] = useState<FooterData>();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("https://cms-next-rosy.vercel.app/api/footer", {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        console.log(response.data.data);
+        if (response.data && response.data.data) {
+          const dt = response.data.data
+          console.log(dt,"footer")
+          setFooter(dt[0]);
+        }
+      })
+      .catch(function (error) {
+        console.log("Error:", error);
+        setError(error.message);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
   return (
     // <div className="bg-[#07152A] flex flex-row py-[25px] px-[32px] md:px-[79px]">
     //   <div className="w-[100%] justify-start text-[white] font-[Poppins] text-[14px] md:text-[20px] font-normal">
@@ -9,7 +46,7 @@ export default function FooterComponent() {
     //   {/* <div className="w-[50%] justify-end flex flex-row"></div> */}
     // </div>
     <div className="bg-[#CBD1D1] pb-[43px]">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-[80px] py-[31px] md:py-[71px] bg-[#CBD1D1] border-b-[1px] border-b-solid border-b-[#3A4553]">
+      {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-[80px] py-[31px] md:py-[71px] bg-[#CBD1D1] border-b-[1px] border-b-solid border-b-[#3A4553]">
         <div>
           <img src={img} />
         </div>
@@ -91,9 +128,9 @@ export default function FooterComponent() {
             Email: psa_lawoffice@gmail.com
           </p>
         </div>
-      </div>
+      </div> */}
       <div className="bg-[#CBD1D1] text-[#0056B3] font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[200%] text-center py-[25px] border-b-[1px] border-b-solid border-b-[#3A4553]">
-        2024 © PETRONEUS SAYUDI & ASSOCIATES Law Office
+        {footer?.title} © {footer?.desc}
       </div>
     </div>
   );

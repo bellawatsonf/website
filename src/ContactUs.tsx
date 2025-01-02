@@ -7,12 +7,22 @@ import TextArea from "antd/es/input/TextArea";
 import HeaderComponent from "./components/Header";
 import FooterComponent from "./components/Footer";
 import { Helmet } from "react-helmet-async";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 type FieldType = {
   firstname?: string;
   lastname?: string;
   phone?: string;
 };
+
+type ContactData ={
+  email:string;
+  phone:string;
+  address:string;
+  embed_url:string;
+  company_name:string;
+}
 
 const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
   console.log("Success:", values);
@@ -22,7 +32,66 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
 
+type BannerData = {
+  desc: string;
+  title: string;
+};
+
+
 export default function ContactUs() {
+  const [bannerData, setBannerData] = useState<BannerData>();
+  const [contactData,setContactData] = useState<ContactData>();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("https://cms-next-rosy.vercel.app/api/banner", {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        console.log(response.data.data);
+        if (response.data && response.data.data) {
+          const dt = response.data.data.filter((el) => el.type === "contact");
+          setBannerData(dt[0]);
+        }
+      })
+      .catch(function (error) {
+        console.log("Error:", error);
+        setError(error.message);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("https://cms-next-rosy.vercel.app/api/contact", {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        console.log(response.data.data);
+        if (response.data && response.data.data) {
+          const dt = response.data.data[0];
+          console.log(dt,'i')
+          setContactData(dt);
+        }
+      })
+      .catch(function (error) {
+        console.log("Error:", error);
+        setError(error.message);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
+  }, []);
   return (
     <>
       <Helmet>
@@ -52,7 +121,7 @@ export default function ContactUs() {
       <HeaderComponent />
       <div className="bg-[url('/ContactUs.svg')] h-[auto] md:h-[480px] px-[80px] pt-[70px] md:pt-[186px] pb-[40px] md:pb-[0px] bg-cover">
         <p className="text-[white] text-[28px] md:text-[64px] font-semibold font-[Poppins] pb-[32px]">
-          HUBUNGI KAMI
+          {bannerData?.title}
         </p>
       </div>
 
@@ -61,17 +130,16 @@ export default function ContactUs() {
           <div className=" pb-[32px] px-[24px] pt-[10%] md:pt-[30%]">
             {/* <img src={logo} className="hidden md:block" /> */}
             <p className="text-[#0056B3] text-[20px] md:text-[24px] font-bold font-[Poppins] py-[12px] md:py-[24px]">
-              KANTOR KAMI
+              {contactData?.company_name}
             </p>
             <p className="text-[#1D1D1D] text-[16px] md:text-[20px] font-medium font-[Poppins] ">
-              Jl. Pondasi Raya No. 28, RT.02 RW 17, Pulo Gadung, Jakarta Timur,
-              13210
+              {contactData?.address}
             </p>
             <div className="flex flex-row items-center pt-[32px]">
               <MailOutlined className="text-[#1D1D1D] text-[16px] md:text-[20px] font-medium font-[Poppins]" />
               <a href="mailto:perkasa.phe@gmail.com" target="_blank">
                 <p className="hover:cursor-pointer text-[#1D1D1D] text-[16px] md:text-[20px] font-medium font-[Poppins] pl-[10px]">
-                  psa_lawoffice@gmail.com
+                  {contactData?.email}
                 </p>
               </a>
             </div>
@@ -79,7 +147,7 @@ export default function ContactUs() {
               <PhoneOutlined className="text-[#1D1D1D] text-[16px] md:text-[20px] font-medium font-[Poppins]" />
               <a href="https://wa.me/+6281294457400" target="_blank">
                 <p className="hover:cursor-pointer text-[#1D1D1D] text-[16px] md:text-[20px] font-medium font-[Poppins] pl-[10px]">
-                  0812-9445-7400
+                  {contactData?.phone}
                 </p>
               </a>
             </div>
@@ -89,7 +157,7 @@ export default function ContactUs() {
             <iframe
               width="100%"
               height="400"
-              src="https://maps.google.com/maps?q=Jl.%20Pondasi%20No.28,%20RT.2/RW.2,%20Kayu%20Putih,%20Kec.%20Pulo%20Gadung,%20Kota%20Jakarta%20Timur,%20Daerah%20Khusus%20Ibukota%20Jakarta%2013210,%20Indonesia&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              src={contactData?.embed_url}
             ></iframe>
           </div>
         </div>

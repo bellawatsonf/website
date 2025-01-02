@@ -5,8 +5,129 @@ import HeaderComponent from "./components/Header";
 import FooterComponent from "./components/Footer";
 import OurClientComponent from "./components/OurClient";
 import { Helmet } from "react-helmet-async";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
+type BannerData = {
+  desc: string;
+  title: string;
+};
+type HomeData = {
+  visi: string;
+  misi: string;
+  grid2_title:string;
+  grid1_title:string;
+};
+
+type FirstGrid = {
+  title: string;
+  description: string;
+  grid1_title: string;
+  grid2_title:string;
+};
+
+type PortoClient ={
+  name:string;
+  desc:string;
+  url_image:string;
+}
 export default function Home() {
+  const [bannerData, setBannerData] = useState<BannerData>();
+  const [homeData, setHomeData] = useState<HomeData>();
+  const [firstGrid, setFirstGrid] = useState<FirstGrid>();
+  const [portoClient,setPortoClient] = useState<PortoClient>()
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("https://cms-next-rosy.vercel.app/api/banner", {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        console.log(response.data.data);
+        if (response.data && response.data.data) {
+          const dt = response.data.data.filter((el) => el.type === "home");
+          setBannerData(dt[0]);
+        }
+      })
+      .catch(function (error) {
+        console.log("Error:", error);
+        setError(error.message);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("https://cms-next-rosy.vercel.app/api/home", {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        console.log(response.data.data[0].grid1_title.split("("), "ppo"),
+          setHomeData(response.data.data[0]);
+      })
+      .catch(function (error) {
+        setError(error.message);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("https://cms-next-rosy.vercel.app/api/bidang_litigasi_dalam", {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        console.log(response.data.data, "pp");
+        let data = response.data.data.sort((a, b) => a.position - b.position);
+        console.log(data, "dg");
+        setFirstGrid(data);
+      })
+      .catch(function (error) {
+        setError(error.message);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("https://cms-next-rosy.vercel.app/api/porto_client", {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        console.log(response.data.data, "psp");
+        let data = response.data.data[0];
+        setPortoClient(data);
+      })
+      .catch(function (error) {
+        setError(error.message);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
   return (
     <>
       <Helmet>
@@ -37,14 +158,10 @@ export default function Home() {
       <div className="h-[auto] md:h-[100vh] bg-[url('/Hero.svg')] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px] ">
         <div className=" md:w-[35%] relative left-[0px] md:left-[80px] top-[40px] md:top-[100px] ">
           <div className="font-[Poppins] text-[26px] md:text-[64px] font-medium leading-[40px] md:leading-[80px]  text-[white] pb-[32px]">
-            PETRONEUS SAYUDI & ASSOCIATES
+            {bannerData?.title}
           </div>
           <p className="font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[24px] text-[white] pb-[32px]">
-            bekerja secara profesional dan didukung oleh tenaga-tenaga yang
-            memiliki kualifikasi di bidang hukum pidana, perdata, perusahaan,
-            perburuhan serta berpengalaman dalam dunia Litigasi (Beracara di
-            Pengadilan) serta memiliki komitmen terhadap Penegakan Hukum
-            bermaksud menawarkan jasa perlindungan dan pelayanan hukum.
+            {bannerData?.desc}
           </p>
           <Button
             type="primary"
@@ -83,8 +200,7 @@ export default function Home() {
               Visi
             </p>
             <p className="text-[#FFF] text-left text-[16px] md:text-[20px] font-normal leading-[32px] font-[Poppins] ">
-              “ Yang Terpenting Bukan Kepastian Hukum Melainkan Keadilan Bagi
-              Masyarakat ”
+              {homeData?.visi}
             </p>
           </div>
           <div className=" border-solid border-1 border-[white] bg-[white] bg-opacity-[0.1] rounded-[12px] backdrop-blur-[22.5px]  py-[40px] md:py-[24px] px-[32px]">
@@ -92,7 +208,7 @@ export default function Home() {
               Misi
             </p>
             <p className="text-[#FFF] text-left text-[16px] md:text-[20px] font-normal leading-[32px] font-[Poppins] ">
-              Memberikan layanan hukum yang optimal kepada klien.
+              {homeData?.misi}
             </p>
           </div>
         </div>
@@ -115,9 +231,9 @@ export default function Home() {
         </div>
         <div className="w-[100%] px-[24px] md:px-[120px] pb-[60px] md:pb-[120px] ">
           <p className="text-[#0d1f3d] font-[Poppins] text-[24px] md:text-[32px] font-bold leading-[32px] pb-[32px] flex flex-row text-center justify-center">
-            Bidang Litigasi{" "}
+            {homeData?.grid1_title.split("(")[0]}{"("}
             <div className="text-[#040915] font-[Poppins] text-[24px] md:text-[32px] font-bold leading-[32px] ">
-              (Di Luar Pengadilan)
+              {homeData?.grid1_title.split("(")[1]}
             </div>
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
@@ -287,210 +403,34 @@ export default function Home() {
           </div>
         </div>
         <div className="w-[100%] px-[24px] md:px-[120px] pb-[60px] md:pb-[120px] ">
-          <p className="text-[#0d1f3d] font-[Poppins] text-[24px] md:text-[32px] font-bold leading-[32px] pb-[32px] flex flex-row text-center justify-center">
-            Bidang Litigasi{" "}
+        <p className="text-[#0d1f3d] font-[Poppins] text-[24px] md:text-[32px] font-bold leading-[32px] pb-[32px] flex flex-row text-center justify-center">
+            {homeData?.grid2_title.split("(")[0]}{"("}
             <div className="text-[#040915] font-[Poppins] text-[24px] md:text-[32px] font-bold leading-[32px] ">
-              (Di Pengadilan)
+              {homeData?.grid2_title.split("(")[1]}
             </div>
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
-            <div className="bg-[#CBD1D1] py-[58px] px-[49px]  w-auto">
-              <div className="border-b-[1px] border-b-solid border-b-[#3A4553]">
-                <p className="text-[#0056B3] text-[24px] md:text-[32px] font-bold leading-[114%] pb-[8px]">
-                  PERDATA
-                </p>
-                <p className="text-[#000000] text-[14px] md:text-[16px] font-normal leading-[140%] pb-[35px]">
-                  <ul>
-                    <li>Mengajukan Gugatan Perdata;</li>
-                    <li>
-                      {" "}
-                      Melakukan upaya hukum (verzet, banding, kasasi sampai
-                      dengan Peninjauan Kembali);
-                    </li>
-                    <li>Mengajukan Eksekusi; </li>
-                    <li>
-                      Mengajukan permohonan penetapan seperti Adopsi dan lain
-                      sebagainya;{" "}
-                    </li>
-                    <li>
-                      Mewakili kepentingan hukum pemberi kuasa di semua badan
-                      peradilan di Indonesia.
-                    </li>
-                  </ul>
-                </p>
+            {firstGrid?.map((el) => (
+              <div className="bg-[#CBD1D1] py-[58px] px-[49px]  w-auto">
+                <div className="border-b-[1px] border-b-solid border-b-[#3A4553]">
+                  <p className="text-[#0056B3] text-[24px] md:text-[32px] font-bold leading-[114%] pb-[8px]">
+                    {el.title}
+                  </p>
+                  <p className="text-[#000000] text-[14px] md:text-[16px] font-normal leading-[140%] pb-[35px]">
+                    <ul>
+                      {el.description.map((item: any) => {
+                        return <li>{item}</li>;
+                      })}
+                    </ul>
+                  </p>
+                </div>
               </div>
-              {/* <div className="flex flex-row pt-[34px] items-center">
-                <div className="w-[50%] ">
-                  <AndroidOutlined className="text-[20px] md:text-[40px] text-[#D1B06B]" />
-                </div>
-                <div className="w-[50%]">
-                  <Button className="bg-[#161D27] text-[14px] md:text-[20px] font-medium text-[white] font-[Poppins] py-[15px] px-[38px] h-auto">
-                    Hubungi
-                  </Button>
-                </div>
-              </div> */}
-            </div>
-            <div className="bg-[#CBD1D1] py-[58px] px-[49px]  w-auto">
-              <div className="border-b-[1px] border-b-solid border-b-[#3A4553]">
-                <p className="text-[#0056B3] text-[24px] md:text-[32px] font-bold leading-[114%] pb-[8px]">
-                  PIDANA
-                </p>
-                <p className="text-[#000000] text-[14px] md:text-[16px] font-normal leading-[140%] pb-[35px]">
-                  <ul>
-                    <li>
-                      Mendampingi serta melindungi kepentingan hukum klien dalam
-                      semua proses perkara pidana baik di tingkat penyidik
-                      sampai dengan di Pengadilan;
-                    </li>
-                    <li>
-                      {" "}
-                      Melakukan upaya hukum (banding, kasasi, sampai dengan
-                      Peninjauan Kembali);
-                    </li>
-                    <li>Mengajukan Pra-Peradilan;</li>
-                    <li>Mengajukan Permohonan Penangguhan Penahanan.</li>
-                  </ul>
-                </p>
-              </div>
-              {/* <div className="flex flex-row pt-[34px] items-center">
-                <div className="w-[50%] ">
-                  <AndroidOutlined className="text-[20px] md:text-[40px] text-[#D1B06B]" />
-                </div>
-                <div className="w-[50%]">
-                  <Button className="bg-[#161D27] text-[14px] md:text-[20px] font-medium text-[white] font-[Poppins] py-[15px] px-[38px] h-auto">
-                    Hubungi
-                  </Button>
-                </div>
-              </div> */}
-            </div>
-            <div className="bg-[#CBD1D1] py-[32px] md:py-[58px] px-[49px] w-auto">
-              <div className="border-b-[1px] border-b-solid border-b-[#3A4553]">
-                <p className="text-[#0056B3] text-[24px] md:text-[32px] font-bold leading-[114%] pb-[8px]">
-                  SENGKETA TATA USAHA NEGARA
-                </p>
-                <p className="text-[#000000] text-[14px] md:text-[16px] font-normal leading-[140%] pb-[35px]">
-                  <ul>
-                    <li>Mengajukan gugatan sengketa TUN ke Pengadilan TUN;</li>
-                    <li>
-                      {" "}
-                      Melakukan upaya hukum (proses dismissal, banding, dan
-                      kasasi);
-                    </li>
-                    <li>
-                      Pada intinya menyelesaikan semua permasalahan yang timbul
-                      dalam sengketa TUN.
-                    </li>
-                  </ul>
-                </p>
-              </div>
-              {/* <div className="flex flex-row pt-[34px] items-center">
-                <div className="w-[50%] ">
-                  <AndroidOutlined className="text-[20px] md:text-[40px] text-[#D1B06B]" />
-                </div>
-                <div className="w-[50%]">
-                  <Button className="bg-[#161D27] text-[14px] md:text-[20px] font-medium text-[white] font-[Poppins] py-[15px] px-[38px] h-auto">
-                    Hubungi
-                  </Button>
-                </div>
-              </div> */}
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-[50px]">
-            <div className="bg-[#CBD1D1] py-[58px] px-[49px]  w-auto">
-              <div className="border-b-[1px] border-b-solid border-b-[#3A4553]">
-                <p className="text-[#0056B3] text-[24px] md:text-[32px] font-bold leading-[114%] pb-[8px]">
-                  SENGKETA MEREK
-                </p>
-                <p className="text-[#000000] text-[14px] md:text-[16px] font-normal leading-[140%] pb-[35px]">
-                  <ul className="list-decimal">
-                    <li>Mengajukan gugatan ke Pengadilan Niaga;</li>
-                    <li> Melakukan upaya hukum;</li>
-                    <li>
-                      Menyelesaikan semua sengketa merek yang timbul dalam
-                      transaksi perdagangan;
-                    </li>
-                    <li>Mendaftarkan hak Merek;</li>
-                    <li>Mendaftarkan hak Paten;.</li>
-                    <li>Mendaftarkan hak Cipta;</li>
-                    <li>Mendaftarkan Desain Industri</li>
-                  </ul>
-                </p>
-              </div>
-              {/* <div className="flex flex-row pt-[34px] items-center">
-                <div className="w-[50%] ">
-                  <AndroidOutlined className="text-[20px] md:text-[40px] text-[#D1B06B]" />
-                </div>
-                <div className="w-[50%]">
-                  <Button className="bg-[#161D27] text-[14px] md:text-[20px] font-medium text-[white] font-[Poppins] py-[15px] px-[38px] h-auto">
-                    Hubungi
-                  </Button>
-                </div>
-              </div> */}
-            </div>
-            <div className="bg-[#CBD1D1] py-[58px] px-[49px]  w-auto">
-              <div className="border-b-[1px] border-b-solid border-b-[#3A4553]">
-                <p className="text-[#0056B3] text-[24px] md:text-[32px] font-bold leading-[114%] pb-[8px]">
-                  SENGKETA PAJAK
-                </p>
-                <p className="text-[#000000] text-[14px] md:text-[16px] font-normal leading-[140%] pb-[35px]">
-                  <ul>
-                    <li>
-                      Mengajukan keberatan-keberatan atas pajak yang dibebankan
-                      kepada Pengadilan Pajak; .
-                    </li>
-                    <li>
-                      {" "}
-                      Menyelesaikan semua permasalahan yang timbul dalam
-                      sengketa pajak
-                    </li>
-                  </ul>
-                </p>
-              </div>
-              {/* <div className="flex flex-row pt-[34px] items-center">
-                <div className="w-[50%] ">
-                  <AndroidOutlined className="text-[20px] md:text-[40px] text-[#D1B06B]" />
-                </div>
-                <div className="w-[50%]">
-                  <Button className="bg-[#161D27] text-[14px] md:text-[20px] font-medium text-[white] font-[Poppins] py-[15px] px-[38px] h-auto">
-                    Hubungi
-                  </Button>
-                </div>
-              </div> */}
-            </div>
-            <div className="bg-[#CBD1D1] py-[32px] md:py-[58px] px-[49px] w-auto">
-              <div className="border-b-[1px] border-b-solid border-b-[#3A4553]">
-                <p className="text-[#0056B3] text-[24px] md:text-[32px] font-bold leading-[114%] pb-[8px]">
-                  PERKARA PERDATA AGAMA
-                </p>
-                <p className="text-[#000000] text-[14px] md:text-[16px] font-normal leading-[140%] pb-[35px]">
-                  <ul>
-                    <li>
-                      Mengajukan permohonan talak atau gugatan cerai ke
-                      Pengadilan Agama;
-                    </li>
-                    <li>Mengajukan permohonan penetapan waris;</li>
-                    <li>Mengajukan permohonan hak asuh anak;</li>
-                    <li>Mengajukan permohonan harta bersama (gono gini);.</li>
-                    <li>Melakukan upaya hukum (verzet, banding, kasasi)</li>
-                  </ul>
-                </p>
-              </div>
-              {/* <div className="flex flex-row pt-[34px] items-center">
-                <div className="w-[50%] ">
-                  <AndroidOutlined className="text-[20px] md:text-[40px] text-[#D1B06B]" />
-                </div>
-                <div className="w-[50%]">
-                  <Button className="bg-[#161D27] text-[14px] md:text-[20px] font-medium text-[white] font-[Poppins] py-[15px] px-[38px] h-auto">
-                    Hubungi
-                  </Button>
-                </div>
-              </div> */}
-            </div>
+            ))}
           </div>
         </div>
       </div>
-      <OurClientComponent />
+      <OurClientComponent portoClient={portoClient} />
       <FooterComponent />
     </>
   );
