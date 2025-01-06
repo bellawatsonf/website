@@ -6,8 +6,9 @@ import { MenuOutlined } from "@ant-design/icons";
 import logo from "../assets/Icon.svg";
 import { useNavigate } from "react-router-dom";
 
-export default function HeaderView() {
+export default function HeaderView(params) {
   let navigate = useNavigate();
+  console.log(params, "params");
   const [open, setopen] = useState("close");
   // const [show, setShow] = useState(false);
 
@@ -19,7 +20,7 @@ export default function HeaderView() {
     <>
       <div className="hidden md:block">
         <div className="block md:flex bg-[#0D71B0] w-[100%] h-auto px-[0px] md:px-[80px] py-[18px] justify-between items-center">
-          <img src={logo} className="px-[20px] md:px-[0px]" />
+          <img src={params?.logo?.url_banner} className="w-[50px] px-[20px] md:px-[0px]" />
 
           {/* <nav>
             <ul className="flex flex-row text-[#2F2F2F] text-[18px] font-medium leading-[32px] font-[Poppins]">

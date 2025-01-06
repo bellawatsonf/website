@@ -17,6 +17,7 @@ type AboutData = {
   section_1_title: string;
   section_1_desc: string;
   section_1_url_image: string;
+  title_card_section: string;
   section_advokat_1: string; // Added this field
 };
 
@@ -153,7 +154,7 @@ export default function AboutUs() {
         </div>
         <div className="pt-[50px] md:pt-[100px]">
           <p className="text-[#0056B3] font-[Poppins] text-center text-[22px] md:text-[40px] leading-[32px] font-sembibold pb-[60px]">
-            PARA ADVOKAT & KONSULTAN HUKUM
+            {aboutData?.title_card_section}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 m-auto">
@@ -175,11 +176,11 @@ export default function AboutUs() {
             ))}
           </div>
 
-          <div className="py-[16px] w-full bg-[#0056B3] mt-[48px]">
+          {/* <div className="py-[16px] w-full bg-[#0056B3] mt-[48px]">
             <p className="text-[#dbdde0] text-center text-[16px] md:text-[20px] font-medium font-[Poppins] leading-[150%]">
               {aboutData?.section_advokat_1}
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* <OurClientComponent /> */}
