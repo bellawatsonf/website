@@ -11,7 +11,7 @@ export default function OurClientComponent(params) {
         <div className={`grid grid-cols-1 md:grid-cols-${params?.portoClient?.length} gap-${params?.portoClient?.length+2}`}>
           {params?.portoClient?.map((el) => (
             <div className="flex items-center">
-              <img src={el.url_image} className="block m-auto" />
+              <img src={el.url_image} className="block m-auto w-[300px]" />
             </div>
           ))}
         </div>

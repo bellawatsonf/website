@@ -3,8 +3,7 @@ import img from "./assets/Rectangle438.svg";
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import FooterComponent from "./components/Footer";
-import img1 from "./assets/cardheader.svg";
-import { Helmet } from "react-helmet-async";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -111,30 +110,7 @@ export default function AboutUs() {
   if (error) return <div>Error: {error}</div>;
   return (
     <>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <meta name="robots" content="follow, index" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>
-          PETRONEUS SAYUDI & ASSOCIATES - Pelayanan Hukum Profesional
-        </title>
-        <meta
-          name="description"
-          content="PETRONEUS SAYUDI & ASSOCIATES memiliki dedikasi tinggi dan selalu bekerja berdasarkan profesionalisme dalam memberikan pelayanan hukum pada klien."
-        />
-        <meta
-          property="og:title"
-          content="PETRONEUS SAYUDI & ASSOCIATES - Pelayanan Hukum Profesional"
-        />
-        <meta
-          property="og:description"
-          content="PETRONEUS SAYUDI & ASSOCIATES memiliki dedikasi tinggi dan selalu bekerja berdasarkan profesionalisme dalam memberikan pelayanan hukum pada klien."
-        />
-        <meta property="og:url" content="https://www.psalawoffice.com" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="URL_TO_YOUR_IMAGE" />
-        <link rel="canonical" href="https://www.psalawoffice.com" />
-      </Helmet>
+ 
       <HeaderComponent />
       <div className="bg-[url('/AboutUs.svg')]  h-[auto] md:h-[480px] px-[80px] pt-[70px] md:pt-[186px] pb-[40px] md:pb-[0px] bg-cover">
         <p className=" text-[white] text-[28px] md:text-[64px] font-semibold font-[Poppins] pb-[32px]">
@@ -168,7 +144,7 @@ export default function AboutUs() {
                     margin: "auto",
                     background: "#CBD1D1",
                   }}
-                  cover={<img alt="example" src={img1} />}
+                  cover={<img alt="example" src={el.url_images} />}
                 >
                   <Meta title={el.name} description={el.desc} />
                 </Card>
