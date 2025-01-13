@@ -2,7 +2,7 @@
 import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
 import img2 from "./assets/Rectangle.svg";
 import type { FormProps } from "antd";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Spin } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import HeaderComponent from "./components/Header";
 import FooterComponent from "./components/Footer";
@@ -93,7 +93,7 @@ export default function ContactUs() {
       });
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="w-full h-[100vh] items-center justify-center flex"><Spin size="large" /></div>;
   if (error) return <div>Error: {error}</div>;
   return (
     <>

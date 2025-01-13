@@ -30,12 +30,12 @@ export default function FooterComponent() {
         console.log("Error:", error);
         setError(error.message);
       })
-      .finally(function () {
-        setLoading(false);
-      });
+      // .finally(function () {
+        // setLoading(false);
+      // });
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  // if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   return (
     // <div className="bg-[#07152A] flex flex-row py-[25px] px-[32px] md:px-[79px]">

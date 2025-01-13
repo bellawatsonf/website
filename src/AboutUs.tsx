@@ -1,11 +1,12 @@
 import HeaderComponent from "./components/Header";
 import img from "./assets/Rectangle438.svg";
-import { Card } from "antd";
+import { Card, Spin } from "antd";
 import Meta from "antd/es/card/Meta";
 import FooterComponent from "./components/Footer";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
 
 type BannerData = {
   desc: string;
@@ -25,12 +26,14 @@ type DataAdvokat = {
   desc: string;
   url_images: string;
   section_advokat_1: string;
-}[];  // Changed to array type
+}[]; // Changed to array type
 
 export default function AboutUs() {
   const [bannerData, setBannerData] = useState<BannerData>();
   const [aboutData, setAboutData] = useState<AboutData>();
   const [dataAdvokat, setDataAdvokat] = useState<DataAdvokat>();
+  const [show, setShow] = useState(false);
+  const [openId,setOpenId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -44,7 +47,9 @@ export default function AboutUs() {
       .then(function (response) {
         console.log(response.data.data);
         if (response.data && response.data.data) {
-          const dt = response.data.data.filter((el: { type: string; }) => el.type === "about");
+          const dt = response.data.data.filter(
+            (el: { type: string }) => el.type === "about"
+          );
           setBannerData(dt[0]);
         }
       })
@@ -102,15 +107,20 @@ export default function AboutUs() {
         setError(error.message);
       })
       .finally(function () {
-        setLoading(false);
+        // setLoading(false);
       });
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="w-full h-[100vh] items-center justify-center flex">
+        <Spin size="large" />
+      </div>
+    );
   if (error) return <div>Error: {error}</div>;
+  console.log(show, "show");
   return (
     <>
- 
       <HeaderComponent />
       <div className="bg-[url('/AboutUs.svg')]  h-[auto] md:h-[480px] px-[80px] pt-[70px] md:pt-[186px] pb-[40px] md:pb-[0px] bg-cover">
         <p className=" text-[white] text-[28px] md:text-[64px] font-semibold font-[Poppins] pb-[32px]">
@@ -133,7 +143,7 @@ export default function AboutUs() {
             {aboutData?.title_card_section}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 m-auto">
+          {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4 m-auto">
             {dataAdvokat?.map((el) => (
               <div>
                 <Card
@@ -148,6 +158,65 @@ export default function AboutUs() {
                 >
                   <Meta title={el.name} description={el.desc} />
                 </Card>
+              </div>
+            ))}
+          </div> */}
+
+          <div
+            className="container grid grid-cols-1 w-[70vw] md:w[90vw] md:grid-cols-3 gap-4 flex justify-center items-center "
+            style={{ margin: "0 auto" }}
+          >
+            {dataAdvokat?.map((el, i) => (
+              <div
+              key={i}
+                className={`${
+                  show === true && i === openId ? "h-[400px]" : "h-auto"
+                }  rounded-md bg-[#d3d3d3] relative `}
+              >
+                <div className="bg-[#0056B3] rounded-t-md pt-[26px] pb-[16px] h-[auto] md:h-[200px]">
+                  <p className="text-[white] font-[Poppins] text-center text-[16px] h-[auto] md:h-[70px] md:text-[20px] leading-[32px] font-sembibold px-[10px] ">
+                   {el?.name}
+                  </p>
+                  <p className="text-[white] font-[Poppins] text-center text-[14px] md:text-[16px] leading-[32px] font-sembibold pb-[60px] px-[10px]">
+                    {el.desc}
+                  </p>
+                </div>
+
+                <div className="mt-[-60px] md:mt-[-40px] ">
+                  <div className="flex-col justify-center items-center w-full ">
+                    <img
+                      src={el.url_images}
+                      className=" w-[100px] h-[100px] object-cover rounded-full block m-auto"
+                    />
+                    {i === openId  ? (
+                      <CaretUpOutlined
+                        className="text-[#778899]  text-[50px] block m-auto"
+                        onClick={() => {
+                            setOpenId(null)
+                            setShow(false);
+                          
+                        }}
+                      />
+                    ) : (
+                      <CaretDownOutlined
+                        className="text-[#778899] text-[50px] block m-auto"
+                        onClick={() => {
+                          
+                            setOpenId(i);
+                            setShow(true);
+                          
+                        }}
+                      />
+                    )}
+                    <p
+                      className={`${
+                        show === true && i === openId? "block" : "hidden"
+                      } text-[#696969] font-[Poppins] text-center text-[14px] md:text-[16px] leading-[32px] font-sembibold pb-[60px]`}
+                    >
+                      {el.desc}
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

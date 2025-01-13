@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 import "./App.css";
 import HeaderComponent from "./components/Header";
 
@@ -138,7 +138,7 @@ export default function Home() {
       });
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="w-full h-[100vh] items-center justify-center flex"><Spin  size="large" /></div>;
   if (error) return <div>Error: {error}</div>;
   return (
     <>
