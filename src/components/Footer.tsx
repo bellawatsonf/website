@@ -7,7 +7,7 @@ type FooterData = {
 };
 export default function FooterComponent() {
   const [footer, setFooter] = useState<FooterData>();
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
