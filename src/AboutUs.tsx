@@ -1,7 +1,7 @@
 import HeaderComponent from "./components/Header";
 import img from "./assets/Rectangle438.svg";
-import { Card, Spin } from "antd";
-import Meta from "antd/es/card/Meta";
+import {  Spin } from "antd";
+// import Meta from "antd/es/card/Meta";
 import FooterComponent from "./components/Footer";
 
 import { useEffect, useState } from "react";
@@ -33,7 +33,7 @@ export default function AboutUs() {
   const [aboutData, setAboutData] = useState<AboutData>();
   const [dataAdvokat, setDataAdvokat] = useState<DataAdvokat>();
   const [show, setShow] = useState(false);
-  const [openId,setOpenId] = useState(null);
+  const [openId,setOpenId] = useState<null | number>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
