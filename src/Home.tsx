@@ -12,7 +12,7 @@ type BannerData = {
   desc: string;
   title: string;
   button_text: string;
-  banner_url:string;
+  url_banner: string;
 };
 
 type HomeData = {
@@ -20,15 +20,15 @@ type HomeData = {
   misi: string;
   grid2_title: string;
   grid1_title: string;
-  title_desc_section:string;
-  desc_section:string;
+  title_desc_section: string;
+  desc_section: string;
 };
 
 type GridItem = {
   title: string;
   description: string[];
   position: number;
-}
+};
 
 type FirstGrid = GridItem[];
 
@@ -38,14 +38,12 @@ type PortoClient = {
   url_image: string;
 };
 
-
-
 export default function Home() {
   const [bannerData, setBannerData] = useState<BannerData>();
   const [logo, setLogo] = useState<BannerData>();
   const [homeData, setHomeData] = useState<HomeData>();
   const [firstGrid, setFirstGrid] = useState<FirstGrid>();
-  const [portoClient,setPortoClient] = useState<PortoClient>()
+  const [portoClient, setPortoClient] = useState<PortoClient>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -58,11 +56,16 @@ export default function Home() {
         },
       })
       .then(function (response) {
-        console.log(response.data.data);
         if (response.data && response.data.data) {
-          const logo = response.data.data.filter((el: { type: string; }) => el.type === "logo");
-          setLogo(logo[0])
-          const dt = response.data.data.filter((el: { type: string; }) => el.type === "home");
+          const logo = response.data.data.filter(
+            (el: { type: string }) => el.type === "logo"
+          );
+          setLogo(logo[0]);
+          const dt = response.data.data.filter(
+            (el: { type: string }) => el.type === "home"
+          );
+          console.log(dt[0].url_banner, "banner");
+
           setBannerData(dt[0]);
         }
       })
@@ -84,7 +87,7 @@ export default function Home() {
         },
       })
       .then(function (response) {
-        console.log(response.data.data[0].grid1_title.split("("), "ppo"),
+        console.log(response.data.data[0], "ppo"),
           setHomeData(response.data.data[0]);
       })
       .catch(function (error) {
@@ -105,7 +108,9 @@ export default function Home() {
       })
       .then(function (response) {
         console.log(response.data.data, "pp");
-       const data = response.data.data.sort((a:GridItem, b:GridItem) => a.position - b.position);
+        const data = response.data.data.sort(
+          (a: GridItem, b: GridItem) => a.position - b.position
+        );
         console.log(data, "dg");
         setFirstGrid(data);
       })
@@ -138,13 +143,22 @@ export default function Home() {
       });
   }, []);
 
-  if (loading) return <div className="w-full h-[100vh] items-center justify-center flex"><Spin  size="large" /></div>;
+  if (loading)
+    return (
+      <div className="w-full h-[100vh] items-center justify-center flex">
+        <Spin size="large" />
+      </div>
+    );
   if (error) return <div>Error: {error}</div>;
   return (
     <>
-   
-      <HeaderComponent logo={logo}/>
-      <div className={`h-[auto] md:h-[100vh] bg-[url('${bannerData?.banner_url}')] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px] `}>
+      <HeaderComponent logo={logo} />
+      <div
+        style={{
+          backgroundImage: `url(${bannerData?.url_banner})`,
+        }}
+        className={`h-[auto] md:h-[100vh]  bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px] `}
+      >
         <div className=" md:w-[35%] relative left-[0px] md:left-[80px] top-[40px] md:top-[100px] ">
           <div className="font-[Poppins] text-[26px] md:text-[64px] font-medium leading-[40px] md:leading-[80px]  text-[white] pb-[32px]">
             {bannerData?.title}
@@ -166,7 +180,7 @@ export default function Home() {
             {homeData?.title_desc_section}
           </p>
           <p className="text-[#374354] font-[Poppins] text-[16px] md:text-[20px] font-bold leading-[32px] pb-[32px]">
-          {homeData?.desc_section}
+            {homeData?.desc_section}
           </p>
           <Button className="h-auto  bg-transparent py-[12px] px-[32px] text-[#07152A] font-[Poppins] text-[14px] md:text-[20px] font-semibold text-center rounded-[999px] border-solid border-1 border-[black]">
             Selengkapnya
@@ -211,9 +225,9 @@ export default function Home() {
             </p>
           </div>
         </div> */}
-      
+
         <div className="w-[100%] px-[24px] md:px-[120px] py-[60px] md:py-[120px] ">
-        <p className="text-[#0d1f3d] font-[Poppins] text-[24px] md:text-[32px] font-bold leading-[32px] pb-[32px] flex flex-row text-center justify-center">
+          <p className="text-[#0d1f3d] font-[Poppins] text-[24px] md:text-[32px] font-bold leading-[32px] pb-[32px] flex flex-row text-center justify-center">
             {homeData?.grid2_title}
             {/* <div className="text-[#040915] font-[Poppins] text-[24px] md:text-[32px] font-bold leading-[32px] ">
               {homeData?.grid2_title.split("(")[1]}

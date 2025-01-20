@@ -1,6 +1,6 @@
 import HeaderComponent from "./components/Header";
 import img from "./assets/Rectangle438.svg";
-import {  Spin } from "antd";
+import { Spin } from "antd";
 // import Meta from "antd/es/card/Meta";
 import FooterComponent from "./components/Footer";
 
@@ -11,6 +11,7 @@ import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
 type BannerData = {
   desc: string;
   title: string;
+  url_banner: string;
 };
 
 type AboutData = {
@@ -33,7 +34,7 @@ export default function AboutUs() {
   const [aboutData, setAboutData] = useState<AboutData>();
   const [dataAdvokat, setDataAdvokat] = useState<DataAdvokat>();
   const [show, setShow] = useState(false);
-  const [openId,setOpenId] = useState<null | number>(null);
+  const [openId, setOpenId] = useState<null | number>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -122,7 +123,12 @@ export default function AboutUs() {
   return (
     <>
       <HeaderComponent />
-      <div className="bg-[url('/AboutUs.svg')]  h-[auto] md:h-[480px] px-[80px] pt-[70px] md:pt-[186px] pb-[40px] md:pb-[0px] bg-cover">
+      <div
+          style={{
+            backgroundImage: `url(${bannerData?.url_banner})`,
+          }}
+        className=" h-[auto] md:h-[480px] px-[80px] pt-[70px] md:pt-[186px] pb-[40px] md:pb-[0px] bg-cover"
+      >
         <p className=" text-[white] text-[28px] md:text-[64px] font-semibold font-[Poppins] pb-[32px]">
           {bannerData?.title}
         </p>
@@ -168,14 +174,14 @@ export default function AboutUs() {
           >
             {dataAdvokat?.map((el, i) => (
               <div
-              key={i}
+                key={i}
                 className={`${
                   show === true && i === openId ? "h-[400px]" : "h-auto"
                 }  rounded-md bg-[#d3d3d3] relative `}
               >
                 <div className="bg-[#0056B3] rounded-t-md pt-[26px] pb-[16px] h-[auto] md:h-[200px]">
                   <p className="text-[white] font-[Poppins] text-center text-[16px] h-[auto] md:h-[70px] md:text-[20px] leading-[32px] font-sembibold px-[10px] ">
-                   {el?.name}
+                    {el?.name}
                   </p>
                   <p className="text-[white] font-[Poppins] text-center text-[14px] md:text-[16px] leading-[32px] font-sembibold pb-[60px] px-[10px]">
                     {el.desc}
@@ -188,29 +194,26 @@ export default function AboutUs() {
                       src={el.url_images}
                       className=" w-[100px] h-[100px] object-cover rounded-full block m-auto"
                     />
-                    {i === openId  ? (
+                    {i === openId ? (
                       <CaretUpOutlined
                         className="text-[#778899]  text-[50px] block m-auto"
                         onClick={() => {
-                            setOpenId(null)
-                            setShow(false);
-                          
+                          setOpenId(null);
+                          setShow(false);
                         }}
                       />
                     ) : (
                       <CaretDownOutlined
                         className="text-[#778899] text-[50px] block m-auto"
                         onClick={() => {
-                          
-                            setOpenId(i);
-                            setShow(true);
-                          
+                          setOpenId(i);
+                          setShow(true);
                         }}
                       />
                     )}
                     <p
                       className={`${
-                        show === true && i === openId? "block" : "hidden"
+                        show === true && i === openId ? "block" : "hidden"
                       } text-[#696969] font-[Poppins] text-center text-[14px] md:text-[16px] leading-[32px] font-sembibold pb-[60px]`}
                     >
                       {el.desc}

@@ -16,13 +16,13 @@ type FieldType = {
   phone?: string;
 };
 
-type ContactData ={
-  email:string;
-  phone:string;
-  address:string;
-  embed_url:string;
-  company_name:string;
-}
+type ContactData = {
+  email: string;
+  phone: string;
+  address: string;
+  embed_url: string;
+  company_name: string;
+};
 
 const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
   console.log("Success:", values);
@@ -35,12 +35,12 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 type BannerData = {
   desc: string;
   title: string;
+  url_banner: string;
 };
-
 
 export default function ContactUs() {
   const [bannerData, setBannerData] = useState<BannerData>();
-  const [contactData,setContactData] = useState<ContactData>();
+  const [contactData, setContactData] = useState<ContactData>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -55,7 +55,9 @@ export default function ContactUs() {
       .then(function (response) {
         console.log(response.data.data);
         if (response.data && response.data.data) {
-          const dt = response.data.data.filter((el: { type: string; }) => el.type === "contact");
+          const dt = response.data.data.filter(
+            (el: { type: string }) => el.type === "contact"
+          );
           setBannerData(dt[0]);
         }
       })
@@ -80,7 +82,7 @@ export default function ContactUs() {
         console.log(response.data.data);
         if (response.data && response.data.data) {
           const dt = response.data.data[0];
-          console.log(dt,'i')
+          console.log(dt, "i");
           setContactData(dt);
         }
       })
@@ -93,7 +95,12 @@ export default function ContactUs() {
       });
   }, []);
 
-  if (loading) return <div className="w-full h-[100vh] items-center justify-center flex"><Spin size="large" /></div>;
+  if (loading)
+    return (
+      <div className="w-full h-[100vh] items-center justify-center flex">
+        <Spin size="large" />
+      </div>
+    );
   if (error) return <div>Error: {error}</div>;
   return (
     <>
@@ -122,7 +129,12 @@ export default function ContactUs() {
         <link rel="canonical" href="https://www.psalawoffice.com" />
       </Helmet>
       <HeaderComponent />
-      <div className="bg-[url('/ContactUs.svg')] h-[auto] md:h-[480px] px-[80px] pt-[70px] md:pt-[186px] pb-[40px] md:pb-[0px] bg-cover">
+      <div
+        style={{
+          backgroundImage: `url(${bannerData?.url_banner})`,
+        }}
+        className="h-[auto] md:h-[480px] px-[80px] pt-[70px] md:pt-[186px] pb-[40px] md:pb-[0px] bg-cover"
+      >
         <p className="text-[white] text-[28px] md:text-[64px] font-semibold font-[Poppins] pb-[32px]">
           {bannerData?.title}
         </p>
