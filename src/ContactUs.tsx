@@ -157,7 +157,7 @@ export default function ContactUs() {
               <div
                 className={`md:w-[35%] relative left-[0px] md:left-[80px] ${
                   el?.desc === null || el.desc === ""
-                    ? "pt-[40px] md:pt-[280px]"
+                    ? "pt-[100px] md:pt-[280px]"
                     : "top-[40px] md:top-[100px]"
                 }  `}
               >
