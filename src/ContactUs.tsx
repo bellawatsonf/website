@@ -41,6 +41,7 @@ type BannerData = {
 export default function ContactUs() {
   const [bannerData, setBannerData] = useState<BannerData>();
   const [contactData, setContactData] = useState<ContactData>();
+  const [logo, setLogo] = useState<BannerData>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -55,6 +56,10 @@ export default function ContactUs() {
       .then(function (response) {
         console.log(response.data.data);
         if (response.data && response.data.data) {
+          const logo = response.data.data.filter(
+            (el: { type: string }) => el.type === "logo"
+          );
+          setLogo(logo[0]);
           const dt = response.data.data.filter(
             (el: { type: string }) => el.type === "contact"
           );
@@ -81,6 +86,7 @@ export default function ContactUs() {
       .then(function (response) {
         console.log(response.data.data);
         if (response.data && response.data.data) {
+         
           const dt = response.data.data[0];
           console.log(dt, "i");
           setContactData(dt);
@@ -132,7 +138,7 @@ export default function ContactUs() {
         <meta property="og:image" content="URL_TO_YOUR_IMAGE" />
         <link rel="canonical" href="https://www.psalawoffice.com" />
       </Helmet>
-      <HeaderComponent />
+      <HeaderComponent logo={logo} />
       {/* <div
         style={{
           backgroundImage: `url(${bannerData?.url_banner})`,

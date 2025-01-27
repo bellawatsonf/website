@@ -31,6 +31,7 @@ type DataAdvokat = {
 
 export default function AboutUs() {
   const [bannerData, setBannerData] = useState<BannerData>();
+  const [logo, setLogo] = useState<BannerData>();
   const [aboutData, setAboutData] = useState<AboutData>();
   const [dataAdvokat, setDataAdvokat] = useState<DataAdvokat>();
   const [show, setShow] = useState(false);
@@ -48,6 +49,10 @@ export default function AboutUs() {
       .then(function (response) {
         console.log(response.data.data);
         if (response.data && response.data.data) {
+          const logo = response.data.data.filter(
+            (el: { type: string }) => el.type === "logo"
+          );
+          setLogo(logo[0]);
           const dt = response.data.data.filter(
             (el: { type: string }) => el.type === "about"
           );
@@ -126,7 +131,7 @@ export default function AboutUs() {
   console.log(show, "show");
   return (
     <>
-      <HeaderComponent />
+      <HeaderComponent logo={logo}/>
       <Carousel afterChange={onChange} arrows infinite={false}>
         {Array.isArray(bannerData) && bannerData.map((el) => (
           <div>

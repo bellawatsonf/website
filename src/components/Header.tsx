@@ -123,7 +123,7 @@ export default function HeaderView(params) {
       <div className="block md:hidden bg-[#0056B3]">
         <div className="flex flex-row py-[18px]">
           <div className="w-[50%] justify-start ">
-            <img src={logo} className="px-[20px] md:px-[0px]" />
+            <img src={params?.logo?.url_banner} className="px-[20px] md:px-[0px] w-[100px]" />
           </div>
           <div className="w-[50%] items-center flex justify-end text-[white]">
             <MenuOutlined
