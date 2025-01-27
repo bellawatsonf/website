@@ -1,6 +1,6 @@
 import HeaderComponent from "./components/Header";
 import img from "./assets/Rectangle438.svg";
-import { Spin } from "antd";
+import { Button, Carousel, Spin } from "antd";
 // import Meta from "antd/es/card/Meta";
 import FooterComponent from "./components/Footer";
 
@@ -51,7 +51,7 @@ export default function AboutUs() {
           const dt = response.data.data.filter(
             (el: { type: string }) => el.type === "about"
           );
-          setBannerData(dt[0]);
+          setBannerData(dt);
         }
       })
       .catch(function (error) {
@@ -112,6 +112,10 @@ export default function AboutUs() {
       });
   }, []);
 
+  const onChange = (currentSlide: number) => {
+    console.log(currentSlide);
+  };
+
   if (loading)
     return (
       <div className="w-full h-[100vh] items-center justify-center flex">
@@ -123,16 +127,58 @@ export default function AboutUs() {
   return (
     <>
       <HeaderComponent />
-      <div
-          style={{
-            backgroundImage: `url(${bannerData?.url_banner})`,
-          }}
-        className=" h-[auto] md:h-[480px] px-[80px] pt-[70px] md:pt-[186px] pb-[40px] md:pb-[0px] bg-cover"
-      >
-        <p className=" text-[white] text-[28px] md:text-[64px] font-semibold font-[Poppins] pb-[32px]">
-          {bannerData?.title}
-        </p>
-      </div>
+      <Carousel afterChange={onChange} arrows infinite={false}>
+        {bannerData?.map((el) => (
+          <div>
+            <div
+              style={{
+                backgroundImage: `url(${el?.url_banner})`,
+              }}
+              className={
+                "h-[auto] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px]"
+              }
+            >
+              <div
+                className={`md:w-[35%] relative left-[0px] md:left-[80px] ${
+                  el?.desc === null || el.desc === ""
+                    ? "pt-[40px] md:pt-[280px]"
+                    : "top-[40px] md:top-[100px]"
+                }  `}
+              >
+                <div className="font-[Poppins] text-[26px] md:text-[64px] font-medium leading-[40px] md:leading-[80px]  text-[white] pb-[32px]">
+                  {el?.title}
+                </div>
+                {el?.desc === null && el.desc === "" ? null : (
+                  <p className="font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[24px] text-[white] pb-[32px]">
+                    {el?.desc}
+                  </p>
+                )}
+
+                <Button
+                  type="primary"
+                  className={`h-[40px] bg-[#0056B3] rounded-[999px] uppercase p-[8px 32px] text-[12px] md:text-[16px] font-semibold font-[Poppins] text-[white] ${
+                    el.button_text !== null && el.button_text !== ""
+                      ? "block"
+                      : "hidden"
+                  }`}
+                  // onClick={()=>navigate(el.button_url)}
+                >
+                  <a
+                    className={`${
+                      el.button_text !== null && el.button_text !== ""
+                        ? "block"
+                        : "hidden"
+                    }`}
+                    href={el.button_url}
+                  >
+                    {el?.button_text}
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </Carousel>
       <div className="w-100% py-[50px] bg-[white] ">
         <div className="m-auto block w-[70%] border-b-[2px] border-b-[#C7C7CC] border-b-solid">
           <p className="text-[#0056B3] font-[Poppins] text-center text-[32px] md:text-[40px] leading-[32px] font-bold pt-[32px] pb-[14px] md:pb-[32px]">

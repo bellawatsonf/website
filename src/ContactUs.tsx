@@ -2,7 +2,7 @@
 import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
 import img2 from "./assets/Rectangle.svg";
 import type { FormProps } from "antd";
-import { Button, Form, Input, Spin } from "antd";
+import { Button, Carousel, Form, Input, Spin } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import HeaderComponent from "./components/Header";
 import FooterComponent from "./components/Footer";
@@ -58,7 +58,7 @@ export default function ContactUs() {
           const dt = response.data.data.filter(
             (el: { type: string }) => el.type === "contact"
           );
-          setBannerData(dt[0]);
+          setBannerData(dt);
         }
       })
       .catch(function (error) {
@@ -95,6 +95,10 @@ export default function ContactUs() {
       });
   }, []);
 
+  const onChange = (currentSlide: number) => {
+    console.log(currentSlide);
+  };
+
   if (loading)
     return (
       <div className="w-full h-[100vh] items-center justify-center flex">
@@ -129,7 +133,7 @@ export default function ContactUs() {
         <link rel="canonical" href="https://www.psalawoffice.com" />
       </Helmet>
       <HeaderComponent />
-      <div
+      {/* <div
         style={{
           backgroundImage: `url(${bannerData?.url_banner})`,
         }}
@@ -138,8 +142,59 @@ export default function ContactUs() {
         <p className="text-[white] text-[28px] md:text-[64px] font-semibold font-[Poppins] pb-[32px]">
           {bannerData?.title}
         </p>
-      </div>
+      </div> */}
+      <Carousel afterChange={onChange} arrows infinite={false}>
+        {bannerData?.map((el) => (
+          <div>
+            <div
+              style={{
+                backgroundImage: `url(${el?.url_banner})`,
+              }}
+              className={
+                "h-[auto] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px]"
+              }
+            >
+              <div
+                className={`md:w-[35%] relative left-[0px] md:left-[80px] ${
+                  el?.desc === null || el.desc === ""
+                    ? "pt-[40px] md:pt-[280px]"
+                    : "top-[40px] md:top-[100px]"
+                }  `}
+              >
+                <div className="font-[Poppins] text-[26px] md:text-[64px] font-medium leading-[40px] md:leading-[80px]  text-[white] pb-[32px]">
+                  {el?.title}
+                </div>
+                {el?.desc === null && el.desc === "" ? null : (
+                  <p className="font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[24px] text-[white] pb-[32px]">
+                    {el?.desc}
+                  </p>
+                )}
 
+                <Button
+                  type="primary"
+                  className={`h-[40px] bg-[#0056B3] rounded-[999px] uppercase p-[8px 32px] text-[12px] md:text-[16px] font-semibold font-[Poppins] text-[white] ${
+                    el.button_text !== null && el.button_text !== ""
+                      ? "block"
+                      : "hidden"
+                  }`}
+                  // onClick={()=>navigate(el.button_url)}
+                >
+                  <a
+                    className={`${
+                      el.button_text !== null && el.button_text !== ""
+                        ? "block"
+                        : "hidden"
+                    }`}
+                    href={el.button_url}
+                  >
+                    {el?.button_text}
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </Carousel>
       <div className="px-[20px] md:px-[80px] pt-[10px] md:pt-[80px] bg-[#F8F8F8]  ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className=" pb-[32px] px-[24px] pt-[10%] md:pt-[30%]">
@@ -160,7 +215,7 @@ export default function ContactUs() {
             </div>
             <div className="flex flex-row items-center pt-[32px]">
               <PhoneOutlined className="text-[#1D1D1D] text-[16px] md:text-[20px] font-medium font-[Poppins]" />
-              <a href="https://wa.me/+6281294457400" target="_blank">
+              <a href={`https://wa.me/+62${contactData?.phone}`}target="_blank">
                 <p className="hover:cursor-pointer text-[#1D1D1D] text-[16px] md:text-[20px] font-medium font-[Poppins] pl-[10px]">
                   {contactData?.phone}
                 </p>

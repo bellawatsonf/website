@@ -1,4 +1,4 @@
-import { Button, Spin } from "antd";
+import { Button, Carousel, Spin } from "antd";
 import "./App.css";
 import HeaderComponent from "./components/Header";
 
@@ -7,6 +7,7 @@ import OurClientComponent from "./components/OurClient";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 
 type BannerData = {
   desc: string;
@@ -39,6 +40,7 @@ type PortoClient = {
 };
 
 export default function Home() {
+  let navigate = useNavigate();
   const [bannerData, setBannerData] = useState<BannerData>();
   const [logo, setLogo] = useState<BannerData>();
   const [homeData, setHomeData] = useState<HomeData>();
@@ -64,9 +66,9 @@ export default function Home() {
           const dt = response.data.data.filter(
             (el: { type: string }) => el.type === "home"
           );
-          console.log(dt[0].url_banner, "banner");
+          console.log(dt, "banner");
 
-          setBannerData(dt[0]);
+          setBannerData(dt);
         }
       })
       .catch(function (error) {
@@ -143,6 +145,10 @@ export default function Home() {
       });
   }, []);
 
+  const onChange = (currentSlide: number) => {
+    console.log(currentSlide);
+  };
+
   if (loading)
     return (
       <div className="w-full h-[100vh] items-center justify-center flex">
@@ -153,7 +159,7 @@ export default function Home() {
   return (
     <>
       <HeaderComponent logo={logo} />
-      <div
+      {/* <div
         style={{
           backgroundImage: `url(${bannerData?.url_banner})`,
         }}
@@ -173,7 +179,39 @@ export default function Home() {
             {bannerData?.button_text}
           </Button>
         </div>
-      </div>
+      </div> */}
+      <Carousel afterChange={onChange} arrows infinite={false}>
+        {bannerData?.map((el) => (
+          <div>
+            <div
+              style={{
+                backgroundImage: `url(${el?.url_banner})`,
+              }}
+              className={
+                "h-[auto] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px]"
+              }
+            >
+              <div className=" md:w-[35%] relative left-[0px] md:left-[80px] top-[40px] md:top-[100px] ">
+                <div className="font-[Poppins] text-[26px] md:text-[64px] font-medium leading-[40px] md:leading-[80px]  text-[white] pb-[32px]">
+                  {el?.title}
+                </div>
+                <p className="font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[24px] text-[white] pb-[32px]">
+                  {el?.desc}
+                </p>
+               
+                <Button
+                  type="primary"
+                  className={`h-[40px] bg-[#0056B3] rounded-[999px] uppercase p-[8px 32px] text-[12px] md:text-[16px] font-semibold font-[Poppins] text-[white] ${el.button_text !== null && el.button_text !== "" ? 'block' :"hidden"}`}
+                  // onClick={()=>navigate(el.button_url)}
+               >
+                  <a className={`${el.button_text !== null && el.button_text !== "" ? 'block' :"hidden"}`} href={el.button_url}>{el?.button_text}</a>
+                </Button>
+               
+              </div>
+            </div>
+          </div>
+        ))}
+      </Carousel>
       <div className="bg-[white]  w-full bg-cover px-[24px] md:px-[80px] py-[50px] md:py-[131px] h-[auto]">
         <div className="w-full md:w-[50%] max-[869px]">
           <p className="text-[#0056B3] font-[Poppins] text-[32px] md:text-[40px] font-bold leading-[32px] pb-[32px]">
@@ -182,7 +220,7 @@ export default function Home() {
           <p className="text-[#374354] font-[Poppins] text-[16px] md:text-[20px] font-bold leading-[32px] pb-[32px]">
             {homeData?.desc_section}
           </p>
-          <Button className="h-auto  bg-transparent py-[12px] px-[32px] text-[#07152A] font-[Poppins] text-[14px] md:text-[20px] font-semibold text-center rounded-[999px] border-solid border-1 border-[black]">
+          <Button className="h-auto  bg-transparent py-[12px] px-[32px] text-[#07152A] font-[Poppins] text-[14px] md:text-[20px] font-semibold text-center rounded-[999px] border-solid border-1 border-[black]" onClick={()=>{navigate('/about-us')}}>
             Selengkapnya
           </Button>
         </div>
