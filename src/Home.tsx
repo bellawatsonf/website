@@ -7,7 +7,7 @@ import OurClientComponent from "./components/OurClient";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type BannerData = {
   desc: string;
@@ -40,7 +40,7 @@ type PortoClient = {
 };
 
 export default function Home() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [bannerData, setBannerData] = useState<BannerData>();
   const [logo, setLogo] = useState<BannerData>();
   const [homeData, setHomeData] = useState<HomeData>();
@@ -181,7 +181,7 @@ export default function Home() {
         </div>
       </div> */}
       <Carousel afterChange={onChange} arrows infinite={false}>
-        {bannerData?.map((el) => (
+        {Array.isArray(bannerData) && bannerData.map((el) => (
           <div>
             <div
               style={{

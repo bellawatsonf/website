@@ -144,7 +144,7 @@ export default function ContactUs() {
         </p>
       </div> */}
       <Carousel afterChange={onChange} arrows infinite={false}>
-        {bannerData?.map((el) => (
+        {Array.isArray(bannerData) && bannerData.map((el)=> (
           <div>
             <div
               style={{

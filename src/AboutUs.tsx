@@ -128,7 +128,7 @@ export default function AboutUs() {
     <>
       <HeaderComponent />
       <Carousel afterChange={onChange} arrows infinite={false}>
-        {bannerData?.map((el) => (
+        {Array.isArray(bannerData) && bannerData.map((el) => (
           <div>
             <div
               style={{
