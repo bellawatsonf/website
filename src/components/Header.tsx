@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { MenuOutlined } from "@ant-design/icons";
 
-import logo from "../assets/Icon.svg";
+// import logo from "../assets/Icon.svg";
 import { useNavigate } from "react-router-dom";
 
 export default function HeaderView(params) {
