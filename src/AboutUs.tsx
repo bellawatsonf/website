@@ -1,5 +1,5 @@
 import HeaderComponent from "./components/Header";
-import img from "./assets/Rectangle438.svg";
+// import img from "./assets/Rectangle438.svg";
 import { Button, Carousel, Spin } from "antd";
 // import Meta from "antd/es/card/Meta";
 import FooterComponent from "./components/Footer";
