@@ -280,11 +280,12 @@ export default function Home() {
                     {el.title}
                   </p>
                   <p className="text-[#000000] text-[14px] md:text-[16px] font-normal leading-[140%] pb-[35px]">
-                    <ul>
+                    {/* <ul>
                       {el.description.map((item) => {
                         return <li>{item}</li>;
                       })}
-                    </ul>
+                    </ul> */}
+                    {el.description}
                   </p>
                 </div>
               </div>

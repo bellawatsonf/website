@@ -17,7 +17,7 @@ type BannerData = {
 type AboutData = {
   section_1_title: string;
   section_1_desc: string;
-  section_1_url_image: string;
+  section_1_url_images: string;
   title_card_section: string;
   section_advokat_1: string; // Added this field
 };
@@ -131,58 +131,59 @@ export default function AboutUs() {
   console.log(show, "show");
   return (
     <>
-      <HeaderComponent logo={logo}/>
+      <HeaderComponent logo={logo} />
       <Carousel afterChange={onChange} arrows infinite={false}>
-        {Array.isArray(bannerData) && bannerData.map((el) => (
-          <div>
-            <div
-              style={{
-                backgroundImage: `url(${el?.url_banner})`,
-              }}
-              className={
-                "h-[auto] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px]"
-              }
-            >
+        {Array.isArray(bannerData) &&
+          bannerData.map((el) => (
+            <div>
               <div
-                className={`md:w-[35%] relative left-[0px] md:left-[80px] ${
-                  el?.desc === null || el.desc === ""
-                    ? "pt-[100px] md:pt-[280px]"
-                    : "top-[40px] md:top-[100px]"
-                }  `}
+                style={{
+                  backgroundImage: `url(${el?.url_banner})`,
+                }}
+                className={
+                  "h-[auto] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px]"
+                }
               >
-                <div className="font-[Poppins] text-[26px] md:text-[64px] font-medium leading-[40px] md:leading-[80px]  text-[white] pb-[32px]">
-                  {el?.title}
-                </div>
-                {el?.desc === null && el.desc === "" ? null : (
-                  <p className="font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[24px] text-[white] pb-[32px]">
-                    {el?.desc}
-                  </p>
-                )}
-
-                <Button
-                  type="primary"
-                  className={`h-[40px] bg-[#0056B3] rounded-[999px] uppercase p-[8px 32px] text-[12px] md:text-[16px] font-semibold font-[Poppins] text-[white] ${
-                    el.button_text !== null && el.button_text !== ""
-                      ? "block"
-                      : "hidden"
-                  }`}
-                  // onClick={()=>navigate(el.button_url)}
+                <div
+                  className={`md:w-[35%] relative left-[0px] md:left-[80px] ${
+                    el?.desc === null || el.desc === ""
+                      ? "pt-[100px] md:pt-[280px]"
+                      : "top-[40px] md:top-[100px]"
+                  }  `}
                 >
-                  <a
-                    className={`${
+                  <div className="font-[Poppins] text-[26px] md:text-[64px] font-medium leading-[40px] md:leading-[80px]  text-[white] pb-[32px]">
+                    {el?.title}
+                  </div>
+                  {el?.desc === null && el.desc === "" ? null : (
+                    <p className="font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[24px] text-[white] pb-[32px]">
+                      {el?.desc}
+                    </p>
+                  )}
+
+                  <Button
+                    type="primary"
+                    className={`h-[40px] bg-[#0056B3] rounded-[999px] uppercase p-[8px 32px] text-[12px] md:text-[16px] font-semibold font-[Poppins] text-[white] ${
                       el.button_text !== null && el.button_text !== ""
                         ? "block"
                         : "hidden"
                     }`}
-                    href={el.button_url}
+                    // onClick={()=>navigate(el.button_url)}
                   >
-                    {el?.button_text}
-                  </a>
-                </Button>
+                    <a
+                      className={`${
+                        el.button_text !== null && el.button_text !== ""
+                          ? "block"
+                          : "hidden"
+                      }`}
+                      href={el.button_url}
+                    >
+                      {el?.button_text}
+                    </a>
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </Carousel>
       <div className="w-100% py-[50px] bg-[white] ">
         <div className="m-auto block w-[70%] border-b-[2px] border-b-[#C7C7CC] border-b-solid">
@@ -193,7 +194,10 @@ export default function AboutUs() {
             {aboutData?.section_1_desc}
           </p>
 
-          <img src={img} className="block m-auto pb-[50px]" />
+          <img
+            src={aboutData?.section_1_url_images}
+            className="block m-auto pb-[50px] h-[400px] w-full"
+          />
         </div>
         <div className="pt-[50px] md:pt-[100px]">
           <p className="text-[#0056B3] font-[Poppins] text-center text-[22px] md:text-[40px] leading-[32px] font-sembibold pb-[60px]">
