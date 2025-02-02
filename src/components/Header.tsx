@@ -19,7 +19,7 @@ export default function HeaderView(params) {
   return (
     <>
       <div className="hidden md:block">
-        <div className="block md:flex bg-[#0D71B0] w-[100%] h-auto px-[0px] md:px-[80px] py-[18px] justify-between items-center">
+        <div className="block md:flex bg-[linear-gradient(180deg,_#009688_29%,_#4db6ac_100%)] w-[100%] h-auto px-[0px] md:px-[80px] py-[18px] justify-between items-center">
           <img src={params?.logo?.url_banner} className="w-[50px] px-[20px] md:px-[0px]" />
 
           {/* <nav>

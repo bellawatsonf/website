@@ -44,7 +44,7 @@ export default function FooterComponent() {
     //   </div>
     //   {/* <div className="w-[50%] justify-end flex flex-row"></div> */}
     // </div>
-    <div className="bg-[#CBD1D1] pb-[43px]">
+    <div className="bg-[linear-gradient(180deg,_#009688_29%,_#4db6ac_100%)]  text-[white] font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[200%] text-center py-[15px]">
       {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-4 px-[80px] py-[31px] md:py-[71px] bg-[#CBD1D1] border-b-[1px] border-b-solid border-b-[#3A4553]">
         <div>
           <img src={img} />
@@ -128,9 +128,10 @@ export default function FooterComponent() {
           </p>
         </div>
       </div> */}
-      <div className="bg-[#CBD1D1] text-[#0056B3] font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[200%] text-center py-[25px] border-b-[1px] border-b-solid border-b-[#3A4553]">
+       {footer?.title} © {footer?.desc}
+      {/* <div className="bg-[#CBD1D1] text-[#0056B3] font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[200%] text-center py-[25px] border-b-[1px] border-b-solid border-b-[#3A4553]">
         {footer?.title} © {footer?.desc}
-      </div>
+      </div> */}
     </div>
   );
 }

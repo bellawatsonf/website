@@ -162,7 +162,7 @@ export default function AboutUs() {
 
                   <Button
                     type="primary"
-                    className={`h-[40px] bg-[#0056B3] rounded-[999px] uppercase p-[8px 32px] text-[12px] md:text-[16px] font-semibold font-[Poppins] text-[white] ${
+                    className={`h-[40px] bg-[linear-gradient(180deg,_#009688_29%,_#4db6ac_100%)] rounded-[999px] uppercase p-[8px 32px] text-[12px] md:text-[16px] font-semibold font-[Poppins] text-[white] ${
                       el.button_text !== null && el.button_text !== ""
                         ? "block"
                         : "hidden"
@@ -187,7 +187,7 @@ export default function AboutUs() {
       </Carousel>
       <div className="w-100% py-[50px] bg-[white] ">
         <div className="m-auto block w-[70%] border-b-[2px] border-b-[#C7C7CC] border-b-solid">
-          <p className="text-[#0056B3] font-[Poppins] text-center text-[32px] md:text-[40px] leading-[32px] font-bold pt-[32px] pb-[14px] md:pb-[32px]">
+          <p className="text-[#00695c] font-[Poppins] text-center text-[32px] md:text-[40px] leading-[32px] font-bold pt-[32px] pb-[14px] md:pb-[32px]">
             {aboutData?.section_1_title}
           </p>
           <p className="text-[#374354] font-[Poppins] text-justify md:text-center text-[14px] md:text-[20px] leading-[32px] font-normal pt-[20px] md:pt-[32px] pb-[32px]">

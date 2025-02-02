@@ -5,7 +5,7 @@ export default function OurClientComponent(params) {
   return (
     <>
       <div className="py-[24px] md:py-[80px] px-[100px]">
-        <p className="text-[#0056B3] font-[Poppins] text-[32px] md:text-[40px] font-semibold leading-[32px] text-center pb-[30px]">
+        <p className="text-[#00695c] font-[Poppins] text-[32px] md:text-[40px] font-semibold leading-[32px] text-center pb-[30px]">
           Our Clients
         </p>
         <div className={`grid grid-cols-1 md:grid-cols-3 gap-4`}>

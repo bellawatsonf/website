@@ -178,7 +178,7 @@ export default function ContactUs() {
 
                 <Button
                   type="primary"
-                  className={`h-[40px] bg-[#0056B3] rounded-[999px] uppercase p-[8px 32px] text-[12px] md:text-[16px] font-semibold font-[Poppins] text-[white] ${
+                  className={`h-[40px] bg-[linear-gradient(180deg,_#009688_29%,_#4db6ac_100%)] rounded-[999px] uppercase p-[8px 32px] text-[12px] md:text-[16px] font-semibold font-[Poppins] text-[white] ${
                     el.button_text !== null && el.button_text !== ""
                       ? "block"
                       : "hidden"
@@ -205,7 +205,7 @@ export default function ContactUs() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className=" pb-[32px] px-[24px] pt-[10%] md:pt-[30%]">
             {/* <img src={logo} className="hidden md:block" /> */}
-            <p className="text-[#0056B3] text-[20px] md:text-[24px] font-bold font-[Poppins] py-[12px] md:py-[24px]">
+            <p className="text-[#00695c] text-[20px] md:text-[24px] font-bold font-[Poppins] py-[12px] md:py-[24px]">
               {contactData?.company_name}
             </p>
             <p className="text-[#1D1D1D] text-[16px] md:text-[20px] font-medium font-[Poppins] ">
@@ -243,7 +243,7 @@ export default function ContactUs() {
           </div>
           <div className="mt-[0px] md:mt-[40px]">
             {/* <img src={logo} className="hidden md:block" /> */}
-            <p className="text-[#0056B3] text-[28px] md:text-[40px] font-semibold font-[Poppins] leading-[32px]">
+            <p className="text-[#00695c] text-[28px] md:text-[40px] font-semibold font-[Poppins] leading-[32px]">
               Send us Message
             </p>
             <div className="w-full md:w-[70%] mt-[12px] md:mt-[40px]">
@@ -300,7 +300,7 @@ export default function ContactUs() {
                   <Button
                     type="primary"
                     htmlType="submit"
-                    className="bg-[#0056B3] w-[100%]"
+                    className="bg-[#00695c] w-[100%]"
                   >
                     Send
                   </Button>

@@ -201,7 +201,7 @@ export default function Home() {
                
                 <Button
                   type="primary"
-                  className={`h-[40px] bg-[#0056B3] rounded-[999px] uppercase p-[8px 32px] text-[12px] md:text-[16px] font-semibold font-[Poppins] text-[white] ${el.button_text !== null && el.button_text !== "" ? 'block' :"hidden"}`}
+                  className={`h-[40px] bg-[linear-gradient(180deg,_#009688_29%,_#4db6ac_100%)] rounded-[999px] uppercase p-[8px 32px] text-[12px] md:text-[16px] font-semibold font-[Poppins] text-[white] ${el.button_text !== null && el.button_text !== "" ? 'block' :"hidden"}`}
                   // onClick={()=>navigate(el.button_url)}
                >
                   <a className={`${el.button_text !== null && el.button_text !== "" ? 'block' :"hidden"}`} href={el.button_url}>{el?.button_text}</a>
@@ -214,7 +214,7 @@ export default function Home() {
       </Carousel>
       <div className="bg-[white]  w-full bg-cover px-[24px] md:px-[80px] py-[50px] md:py-[131px] h-[auto]">
         <div className="w-full md:w-[50%] max-[869px]">
-          <p className="text-[#0056B3] font-[Poppins] text-[32px] md:text-[40px] font-bold leading-[32px] pb-[32px]">
+          <p className="text-[#00695c] font-[Poppins] text-[32px] md:text-[40px] font-bold leading-[32px] pb-[32px]">
             {homeData?.title_desc_section}
           </p>
           <p className="text-[#374354] font-[Poppins] text-[16px] md:text-[20px] font-bold leading-[32px] pb-[32px]">
@@ -226,7 +226,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="text-[#E7C070] text-center text-[32px] md:text-[40px] font-semibold leading-[32px] font-[Poppins] py-[60px] md:py-[80px] px-[24px] md:px-[92px] bg-[#636767]">
+      <div className="text-[#E7C070] text-center text-[32px] md:text-[40px] font-semibold leading-[32px] font-[Poppins] py-[60px] md:py-[80px] px-[24px] md:px-[92px] bg-[#4DB6AC]">
         {/* Vision & Mission */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className=" border-solid border-1 border-[white] bg-[white] bg-opacity-[0.1] rounded-[12px] backdrop-blur-[22.5px]  py-[40px] md:py-[24px] px-[32px]">
@@ -274,9 +274,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
             {firstGrid?.map((el) => (
-              <div className="bg-[#CBD1D1] py-[58px] px-[49px]  w-auto">
+              <div className="bg-[#E0F2F1] py-[58px] px-[49px]  w-auto">
                 <div className="border-b-[1px] border-b-solid border-b-[#3A4553]">
-                  <p className="text-[#0056B3] text-[24px] md:text-[32px] font-bold leading-[114%] pb-[8px]">
+                  <p className="text-[#00695c] text-[24px] md:text-[32px] font-bold leading-[114%] pb-[8px]">
                     {el.title}
                   </p>
                   <p className="text-[#000000] text-[14px] md:text-[16px] font-normal leading-[140%] pb-[35px]">
