@@ -187,7 +187,7 @@ export default function AboutUs() {
       </Carousel>
       <div className="w-100% py-[50px] bg-[white] ">
         <div className="m-auto block w-[70%] border-b-[2px] border-b-[#C7C7CC] border-b-solid">
-          <p className="text-[#00695c] font-[Poppins] text-center text-[32px] md:text-[40px] leading-[32px] font-bold pt-[32px] pb-[14px] md:pb-[32px]">
+          <p className="text-[#00695c] font-[Poppins] text-center text-[26px] md:text-[40px] leading-[32px] font-bold pt-[32px] pb-[14px] md:pb-[32px]">
             {aboutData?.section_1_title}
           </p>
           <p className="text-[#374354] font-[Poppins] text-justify md:text-center text-[14px] md:text-[20px] leading-[32px] font-normal pt-[20px] md:pt-[32px] pb-[32px]">
