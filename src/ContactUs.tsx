@@ -1,8 +1,8 @@
 // import React from "react";
 import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
 // import img2 from "./assets/Rectangle.svg";
-import type { FormProps } from "antd";
-import { Button, Carousel, Form, Input, Spin } from "antd";
+
+import { Button, Carousel, Form, Input, message, Spin } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import HeaderComponent from "./components/Header";
 import FooterComponent from "./components/Footer";
@@ -10,11 +10,7 @@ import FooterComponent from "./components/Footer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-type FieldType = {
-  firstname?: string;
-  lastname?: string;
-  phone?: string;
-};
+
 
 type ContactData = {
   email: string;
@@ -24,13 +20,13 @@ type ContactData = {
   company_name: string;
 };
 
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-  console.log("Success:", values);
-};
+// const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
+//   console.log("Success:", values);
+// };
 
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
+// const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
+//   console.log("Failed:", errorInfo);
+// };
 
 type BannerData = {
   desc: string;
@@ -106,6 +102,29 @@ console.log(bannerData, "ini banner data")
     console.log(currentSlide);
   };
 
+  useEffect(() => {
+    axios.get("https://cms-next-rosy.vercel.app/api/contact_client")
+    .then((data)=>{data})
+  })
+  async function onFinish(values) {
+
+    try {
+      await axios.post("https://cms-next-rosy.vercel.app/api/contact_client", values, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+  
+      message.success("Message sent successfully");
+    } catch (error) {
+      message.error("Message send failed");
+      console.error("Error sending message:", error);
+    }
+  
+  
+  }
   if (loading)
     return (
       <div className="w-full h-[100vh] items-center justify-center flex">
@@ -238,13 +257,13 @@ console.log(bannerData, "ini banner data")
                 name="basic"
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
+                // onFinishFailed={onFinishFailed}
                 autoComplete="off"
               >
                 <div className="flex flex-row">
                   <div className="w-[50%] mr-[10px]">
-                    <Form.Item<FieldType>
-                      name="firstname"
+                    <Form.Item
+                      name="first_name"
                       rules={[
                         {
                           required: true,
@@ -256,8 +275,8 @@ console.log(bannerData, "ini banner data")
                     </Form.Item>
                   </div>
                   <div className="w-[50%]">
-                    <Form.Item<FieldType>
-                      name="lastname"
+                    <Form.Item
+                      name="last_name"
                       rules={[
                         {
                           required: true,
@@ -270,7 +289,7 @@ console.log(bannerData, "ini banner data")
                   </div>
                 </div>
 
-                <Form.Item<FieldType>
+                <Form.Item
                   name="phone"
                   rules={[
                     { required: true, message: "Please input your phone" },
@@ -279,7 +298,7 @@ console.log(bannerData, "ini banner data")
                   <Input placeholder="input your phone number" />
                 </Form.Item>
 
-                <Form.Item>
+                <Form.Item name="message">
                   <TextArea rows={4} />
                 </Form.Item>
 
