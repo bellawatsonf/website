@@ -63,6 +63,7 @@ export default function ContactUs() {
           const dt = response.data.data.filter(
             (el: { type: string }) => el.type === "contact"
           );
+          console.log(dt, "ini hasildt")
           setBannerData(dt);
         }
       })
@@ -100,7 +101,7 @@ export default function ContactUs() {
         setLoading(false);
       });
   }, []);
-
+console.log(bannerData, "ini banner data")
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
   };
@@ -114,7 +115,7 @@ export default function ContactUs() {
   if (error) return <div>Error: {error}</div>;
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <meta charSet="utf-8" />
         <meta name="robots" content="follow, index" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -137,7 +138,7 @@ export default function ContactUs() {
         <meta property="og:type" content="website" />
         <meta property="og:image" content="URL_TO_YOUR_IMAGE" />
         <link rel="canonical" href="https://www.psalawoffice.com" />
-      </Helmet>
+      </Helmet> */}
       <HeaderComponent logo={logo} />
       {/* <div
         style={{
@@ -203,7 +204,7 @@ export default function ContactUs() {
       </Carousel>
       <div className="px-[20px] md:px-[80px] pt-[10px] md:pt-[80px] bg-[#F8F8F8]  ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className=" pb-[32px] px-[24px] pt-[10%] md:pt-[30%]">
+          <div className=" pb-[32px] px-[24px] pt-[10%] md:pt-[3%]">
             {/* <img src={logo} className="hidden md:block" /> */}
             <p className="text-[#00695c] text-[20px] md:text-[24px] font-bold font-[Poppins] py-[12px] md:py-[24px]">
               {contactData?.company_name}
@@ -227,21 +228,7 @@ export default function ContactUs() {
                 </p>
               </a>
             </div>
-          </div>
-
-          <div className="py-[32px] px-[10px] md:px-[24px]">
-            <iframe
-              width="100%"
-              height="400"
-              src={contactData?.embed_url}
-            ></iframe>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="py-[0px] md:py-[32px] px-[10px] md:px-[24px] ">
-            <img src={img2} className="w-[100%]  h-[302px] md:h-[402px]" />
-          </div>
-          <div className="mt-[0px] md:mt-[40px]">
+            <div className="mt-[0px] md:mt-[40px]">
             {/* <img src={logo} className="hidden md:block" /> */}
             <p className="text-[#00695c] text-[28px] md:text-[40px] font-semibold font-[Poppins] leading-[32px]">
               Send us Message
@@ -308,6 +295,87 @@ export default function ContactUs() {
               </Form>
             </div>
           </div>
+          </div>
+
+          <div className="py-[32px] px-[10px] md:px-[24px]">
+            <iframe
+              width="100%"
+              height="100%"
+              src={contactData?.embed_url}
+            ></iframe>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/*<div className="py-[0px] md:py-[32px] px-[10px] md:px-[24px] ">
+            <img src={img2} className="w-[100%]  h-[302px] md:h-[402px]" />
+          </div>*/}
+          {/* <div className="mt-[0px] md:mt-[40px]">
+            <img src={logo} className="hidden md:block" />
+            <p className="text-[#00695c] text-[28px] md:text-[40px] font-semibold font-[Poppins] leading-[32px]">
+              Send us Message
+            </p>
+            <div className="w-full md:w-[70%] mt-[12px] md:mt-[40px]">
+              <Form
+                name="basic"
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+              >
+                <div className="flex flex-row">
+                  <div className="w-[50%] mr-[10px]">
+                    <Form.Item<FieldType>
+                      name="firstname"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your firstname",
+                        },
+                      ]}
+                    >
+                      <Input placeholder="input your firstname" />
+                    </Form.Item>
+                  </div>
+                  <div className="w-[50%]">
+                    <Form.Item<FieldType>
+                      name="lastname"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your lastname",
+                        },
+                      ]}
+                    >
+                      <Input placeholder="input your lastname" />
+                    </Form.Item>
+                  </div>
+                </div>
+
+                <Form.Item<FieldType>
+                  name="phone"
+                  rules={[
+                    { required: true, message: "Please input your phone" },
+                  ]}
+                >
+                  <Input placeholder="input your phone number" />
+                </Form.Item>
+
+                <Form.Item>
+                  <TextArea rows={4} />
+                </Form.Item>
+
+                <Form.Item>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="bg-[#00695c] w-[100%]"
+                  >
+                    Send
+                  </Button>
+                </Form.Item>
+              </Form>
+            </div>
+          </div> */}
         </div>
       </div>
       <FooterComponent />
