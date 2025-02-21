@@ -1,12 +1,12 @@
 // import React from "react";
 import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
-import img2 from "./assets/Rectangle.svg";
+// import img2 from "./assets/Rectangle.svg";
 import type { FormProps } from "antd";
 import { Button, Carousel, Form, Input, Spin } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import HeaderComponent from "./components/Header";
 import FooterComponent from "./components/Footer";
-import { Helmet } from "react-helmet-async";
+// import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
