@@ -21,18 +21,18 @@ export default function FooterComponent() {
       .then(function (response) {
         console.log(response.data.data);
         if (response.data && response.data.data) {
-          const dt = response.data.data
-          console.log(dt,"footer")
+          const dt = response.data.data;
+          console.log(dt, "footer");
           setFooter(dt[0]);
         }
       })
       .catch(function (error) {
         console.log("Error:", error);
         setError(error.message);
-      })
-      // .finally(function () {
-        // setLoading(false);
-      // });
+      });
+    // .finally(function () {
+    // setLoading(false);
+    // });
   }, []);
 
   // if (loading) return <div>Loading...</div>;
@@ -128,7 +128,13 @@ export default function FooterComponent() {
           </p>
         </div>
       </div> */}
-       {footer?.title} © {footer?.desc}
+      <div className="block md:hidden">
+        {footer?.title} © <br />
+        {footer?.desc}
+      </div>
+      <div className="hidden md:block">
+        {footer?.title} © {footer?.desc}
+      </div>
       {/* <div className="bg-[#CBD1D1] text-[#0056B3] font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[200%] text-center py-[25px] border-b-[1px] border-b-solid border-b-[#3A4553]">
         {footer?.title} © {footer?.desc}
       </div> */}

@@ -204,15 +204,15 @@ console.log(bannerData, "ini banner data")
       </Carousel>
       <div className="px-[20px] md:px-[80px] pt-[10px] md:pt-[80px] bg-[#F8F8F8]  ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className=" pb-[32px] px-[24px] pt-[10%] md:pt-[3%]">
+          <div className="pb-[0px] md:pb-[32px] px-[24px] pt-[10%] md:pt-[3%]">
             {/* <img src={logo} className="hidden md:block" /> */}
-            <p className="text-[#00695c] text-[20px] md:text-[24px] font-bold font-[Poppins] py-[12px] md:py-[24px]">
+            <p className="text-[#00695c] text-[20px] md:text-[24px] font-bold font-[Poppins] py-[10px] md:py-[24px]">
               {contactData?.company_name}
             </p>
             <p className="text-[#1D1D1D] text-[16px] md:text-[20px] font-medium font-[Poppins] ">
               {contactData?.address}
             </p>
-            <div className="flex flex-row items-center pt-[32px]">
+            <div className="flex flex-row items-center pt-[20px] md:pt-[32px]">
               <MailOutlined className="text-[#1D1D1D] text-[16px] md:text-[20px] font-medium font-[Poppins]" />
               <a href="mailto:perkasa.phe@gmail.com" target="_blank">
                 <p className="hover:cursor-pointer text-[#1D1D1D] text-[16px] md:text-[20px] font-medium font-[Poppins] pl-[10px]">
@@ -220,7 +220,7 @@ console.log(bannerData, "ini banner data")
                 </p>
               </a>
             </div>
-            <div className="flex flex-row items-center pt-[32px]">
+            <div className="flex flex-row items-center pt-[20px] md:pt-[32px]">
               <PhoneOutlined className="text-[#1D1D1D] text-[16px] md:text-[20px] font-medium font-[Poppins]" />
               <a href={`https://wa.me/+62${contactData?.phone}`}target="_blank">
                 <p className="hover:cursor-pointer text-[#1D1D1D] text-[16px] md:text-[20px] font-medium font-[Poppins] pl-[10px]">
@@ -228,9 +228,9 @@ console.log(bannerData, "ini banner data")
                 </p>
               </a>
             </div>
-            <div className="mt-[0px] md:mt-[40px]">
+            <div className="mt-[30px] md:mt-[40px]">
             {/* <img src={logo} className="hidden md:block" /> */}
-            <p className="text-[#00695c] text-[28px] md:text-[40px] font-semibold font-[Poppins] leading-[32px]">
+            <p className="text-[#00695c] text-[24px] md:text-[40px] font-semibold font-[Poppins] leading-[32px]">
               Send us Message
             </p>
             <div className="w-full md:w-[70%] mt-[12px] md:mt-[40px]">
@@ -297,10 +297,17 @@ console.log(bannerData, "ini banner data")
           </div>
           </div>
 
-          <div className="py-[32px] px-[10px] md:px-[24px]">
+          <div className="hidden md:block py-[12px] md:py-[32px] px-[10px] md:px-[24px]">
             <iframe
               width="100%"
               height="100%"
+              src={contactData?.embed_url}
+            ></iframe>
+          </div>
+          <div className="block md:hidden py-[12px] md:py-[32px] px-[10px] md:px-[24px]">
+            <iframe
+              width="100%"
+              height="400px"
               src={contactData?.embed_url}
             ></iframe>
           </div>

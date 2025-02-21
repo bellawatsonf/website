@@ -120,7 +120,7 @@ export default function HeaderView(params) {
           /> */}
         </div>
       </div>
-      <div className="block md:hidden bg-[#0056B3]">
+      <div className="block md:hidden bg-[linear-gradient(180deg,_#009688_29%,_#4db6ac_100%)]">
         <div className="flex flex-row py-[18px]">
           <div className="w-[50%] justify-start ">
             <img src={params?.logo?.url_banner} className="px-[20px] md:px-[0px] w-[100px]" />
@@ -151,7 +151,7 @@ export default function HeaderView(params) {
           >
             <ul className="p-[20px]">
               <li
-                className="pr-[40px] hover:cursor-pointer font-[Poppins] text-[20px] py-[10px] text-[#0056B3]"
+                className="pr-[40px] hover:cursor-pointer font-[Poppins] text-[20px] py-[10px] text-[#00695c]"
                 onClick={() => {
                   if (open === "open") {
                     setopen("close");
@@ -162,7 +162,7 @@ export default function HeaderView(params) {
                 Beranda
               </li>
               <li
-                className="pr-[40px] hover:cursor-pointer font-[Poppins] text-[20px] py-[10px] text-[#0056B3]"
+                className="pr-[40px] hover:cursor-pointer font-[Poppins] text-[20px] py-[10px] text-[#00695c]"
                 onClick={() => {
                   console.log("masuk");
 
@@ -205,7 +205,7 @@ export default function HeaderView(params) {
               </li> */}
               {/* <li className="pr-[40px] hover:cursor-pointer" onClick={()=>navigate('/')}>General Kontraktor</li> */}
               <li
-                className="pr-[40px] hover:cursor-pointer font-[Poppins] text-[20px] py-[10px] text-[#0056B3]"
+                className="pr-[40px] hover:cursor-pointer font-[Poppins] text-[20px] py-[10px] text-[#00695c]"
                 onClick={() => {
                   if (open === "open") {
                     setopen("close");
