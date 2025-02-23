@@ -221,7 +221,7 @@ console.log(bannerData, "ini banner data")
           </div>
         ))}
       </Carousel>
-      <div className="px-[20px] md:px-[80px] pt-[10px] md:pt-[80px] bg-[#F8F8F8]  ">
+      <div className="px-[20px] md:px-[80px] pt-[10px] md:pt-[80px] bg-[#F8F8F8] pb-[30px]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="pb-[0px] md:pb-[32px] px-[24px] pt-[10%] md:pt-[3%]">
             {/* <img src={logo} className="hidden md:block" /> */}

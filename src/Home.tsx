@@ -23,6 +23,7 @@ type HomeData = {
   grid1_title: string;
   title_desc_section: string;
   desc_section: string;
+  ruang_lingkup:string;
 };
 
 type GridItem = {
@@ -188,7 +189,7 @@ export default function Home() {
                 backgroundImage: `url(${el?.url_banner})`,
               }}
               className={
-                "h-[70vh] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px]"
+                "h-[50vh] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px]"
               }
             >
               <div className=" md:w-[35%] relative left-[0px] md:left-[80px] top-[40px] md:top-[100px] ">
@@ -225,6 +226,7 @@ export default function Home() {
           </Button>
         </div>
       </div>
+      
 
       <div className="text-[#E7C070] text-center text-[32px] md:text-[40px] font-semibold leading-[32px] font-[Poppins] py-[60px] md:py-[80px] px-[24px] md:px-[92px] bg-[#4DB6AC]">
         {/* Vision & Mission */}
@@ -247,22 +249,27 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {/* <div className="bg-[white]  w-full bg-cover px-[24px] md:px-[80px] pt-[40px]  h-[auto]">
+        <div className="w-full  max-[869px]">
+          <p className="align-justify text-[#00695c] font-[Poppins] text-[16px] md:text-[16px] font-bold leading-[32px] pb-[32px]">
+            {homeData?.ruang_lingkup}
+          </p>
+         
+        </div>
+      </div> */}
       <div className="bg-[white] bg-cover w-full h-[auto]">
-        {/* <div className="flex flex-row py-[40px] md:py-[80px] px-[24px] md:px-[120px]">
-          <div className="border-solid border-r-[1px] border-[black] w-full md:w-[15%]">
-            <p className="text-[#0056B3] text-[24px] md:text-[32px] font-bold leading-[32px] md:leading-[114.6%]">
-              RUANG LINGKUP PELAYANAN JASA
+        <div className="flex flex-col md:flex-row pt-[40px] md:pt-[80px] px-[24px] md:px-[120px] ">
+          <div className="border-none md:border-solid border-r-[1px] border-[black] w-full md:w-[20%]">
+            <p className="text-center md:text-left text-[#00695c] text-[24px] md:text-[32px] font-bold leading-[32px] md:leading-[114.6%] pb-[15px] md:pb-[0px]">
+              Information
             </p>
           </div>
-          <div className="w-full md:w-[85%] pl-[20px] md:pl-[80px] text-[14px] md:text-[20px] leading-[24px] md:leading-[32px]">
+          <div className="text-justify font-[Poppins] w-full md:w-[85%] pl-[20px] md:pl-[80px] text-[12px] md:text-[18px] leading-[24px] md:leading-[32px]">
             <p>
-              There are many variations of passages of Lorem Ipsum available,
-              but the majority have su alteration in some form, by injected
-              humour, oir randomised workds which don't look even slightly
-              believable.
+               {homeData?.ruang_lingkup}
             </p>
           </div>
-        </div> */}
+        </div>
 
         <div className="w-[100%] px-[24px] md:px-[120px] py-[60px] md:py-[120px] ">
           <p className="text-[#0d1f3d] font-[Poppins] text-[24px] md:text-[32px] font-bold leading-[32px] pb-[32px] flex flex-row text-center justify-center">
@@ -274,7 +281,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
             {firstGrid?.map((el) => (
-              <div className="bg-[#E0F2F1] py-[58px] px-[49px]  w-auto">
+              <div className="bg-[#E0F2F1] py-[58px] px-[49px] w-auto">
                 <div className="border-b-[1px] border-b-solid border-b-[#3A4553]">
                   <p className="text-[#00695c] text-[24px] md:text-[32px] font-bold leading-[114%] pb-[8px]">
                     {el.title}
