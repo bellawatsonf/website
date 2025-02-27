@@ -174,7 +174,7 @@ console.log(bannerData, "ini banner data")
           backgroundImage: `url(${img?.url_banner})`,
         }}
         className={
-          "h-[auto] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px]"
+          "h-[200px] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px]"
         } >
         {/* <p className="text-[white] text-[28px] md:text-[64px] font-semibold font-[Poppins] pb-[32px]">
           {bannerData?.title}
@@ -232,9 +232,9 @@ console.log(bannerData, "ini banner data")
           </div>
         ))}
       </Carousel> */}
-      <div className="w-100% py-[50px] bg-[white] ">
+      <div className="w-100% py-[30px] md:py-[50px] bg-[white] ">
       <div className="m-auto block w-[70%] border-b-[2px] border-b-[#C7C7CC] border-b-solid">
-          <p className="text-[#00695c] font-[Poppins] text-center text-[26px] md:text-[40px] leading-[32px] font-bold pt-[32px] pb-[14px] md:pb-[32px]">
+          <p className="text-[#00695c] font-[Poppins] text-center text-[26px] md:text-[40px] leading-[32px] font-bold pt-[0px] md:pt-[32px] pb-[14px] md:pb-[32px]">
             {img?.title}
           </p>
           <p className="text-[#374354] font-[Poppins] text-justify md:text-center text-[14px] md:text-[20px] leading-[32px] font-normal pt-[20px] md:pt-[32px] pb-[32px]">
