@@ -126,7 +126,7 @@ export default function HeaderView(params) {
         </div>
       </div>
       <div className="block md:hidden bg-[linear-gradient(180deg,_#009688_29%,_#4db6ac_100%)]">
-        <div className="flex flex-row py-[18px]">
+        <div className="flex flex-row py-[18px] items-center">
           <div className="w-[50%] justify-start ">
             <img src={params?.logo?.url_banner} className="px-[20px] md:px-[0px] w-[100px]" />
           </div>
