@@ -141,7 +141,7 @@ export default function AboutUs() {
                   backgroundImage: `url(${el?.url_banner})`,
                 }}
                 className={
-                  "h-[auto] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px]"
+                  "h-[auto] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[100px] md:pb-[50px]"
                 }
               >
                 <div
@@ -196,7 +196,7 @@ export default function AboutUs() {
 
           <img
             src={aboutData?.section_1_url_images}
-            className="block m-auto pb-[50px] h-[400px] w-full"
+            className="block m-auto pb-[50px] h-[250px] md:h-[400px] w-full"
           />
         </div>
         <div className="pt-[50px] md:pt-[100px]">

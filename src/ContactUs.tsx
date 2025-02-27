@@ -177,7 +177,7 @@ console.log(bannerData, "ini banner data")
                 backgroundImage: `url(${el?.url_banner})`,
               }}
               className={
-                "h-[auto] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px]"
+                "h-[auto] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[100px] md:pb-[50px]"
               }
             >
               <div

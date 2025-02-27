@@ -213,7 +213,7 @@ export default function Home() {
                   backgroundImage: `url(${el?.url_banner})`,
                 }}
                 className={
-                  "h-[50vh] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px]"
+                  "h-[auto] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[100px] md:pb-[50px]"
                 }
               >
                 <div className="md:w-[50%] relative left-[0px] md:left-[80px] top-[40px] md:top-[100px] ">
