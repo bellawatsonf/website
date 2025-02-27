@@ -6,7 +6,9 @@ import Home from "./Home.tsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import AboutUs from "./AboutUs.tsx";
 import ContactUs from "./ContactUs.tsx";
+import More from "./More.tsx";
 import { HelmetProvider } from "react-helmet-async";
+import Galery from "./Galery.tsx"
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
   {
     path: "/contact-us",
     element: <ContactUs />,
+  },
+  {
+    path: "/more",
+    element: <More />,
+  },
+  {
+    path: "/galery",
+    element: <Galery />,
   },
 ]);
 

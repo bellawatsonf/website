@@ -2,13 +2,14 @@
 import { MailOutlined, PhoneOutlined } from "@ant-design/icons";
 // import img2 from "./assets/Rectangle.svg";
 
-import { Button, Carousel, Form, Input, message, Spin } from "antd";
+import { Button,  Form, Input, message, Spin } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import HeaderComponent from "./components/Header";
 import FooterComponent from "./components/Footer";
 // import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 
 
 
@@ -34,12 +35,16 @@ type BannerData = {
   url_banner: string;
 };
 
-export default function ContactUs() {
+export default function More() {
   const [bannerData, setBannerData] = useState<BannerData>();
   const [contactData, setContactData] = useState<ContactData>();
   const [logo, setLogo] = useState<BannerData>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [img,setimg]=  useState<BannerData>();
+  const [searchParams] = useSearchParams(); // Destructuring dengan benar
+  const id = searchParams.get("id"); 
+ console.log(id, "ini idddd ")
 
   useEffect(() => {
     axios
@@ -50,14 +55,19 @@ export default function ContactUs() {
         },
       })
       .then(function (response) {
-        console.log(response.data.data);
+        console.log(response.data.data, "ini response");
         if (response.data && response.data.data) {
           const logo = response.data.data.filter(
             (el: { type: string }) => el.type === "logo"
           );
           setLogo(logo[0]);
+          const dtprm= response.data.data.filter(
+            (el: { type: string,id:string }) => el.type === "home" && Number(el.id) === Number(id)
+          );
+         setimg(dtprm[0]);
+          console.log(dtprm, "ini id")
           const dt = response.data.data.filter(
-            (el: { type: string }) => el.type === "contact"
+            (el: { type: string }) => el.type === "contact" 
           );
           console.log(dt, "ini hasildt")
           setBannerData(dt);
@@ -98,9 +108,9 @@ export default function ContactUs() {
       });
   }, []);
 console.log(bannerData, "ini banner data")
-  const onChange = (currentSlide: number) => {
-    console.log(currentSlide);
-  };
+  // const onChange = (currentSlide: number) => {
+  //   console.log(currentSlide);
+  // };
 
   useEffect(() => {
     axios.get("https://cms-next-rosy.vercel.app/api/contact_client")
@@ -159,17 +169,18 @@ console.log(bannerData, "ini banner data")
         <link rel="canonical" href="https://www.psalawoffice.com" />
       </Helmet> */}
       <HeaderComponent logo={logo} />
-      {/* <div
+      <div
         style={{
-          backgroundImage: `url(${bannerData?.url_banner})`,
+          backgroundImage: `url(${img?.url_banner})`,
         }}
-        className="h-[auto] md:h-[480px] px-[80px] pt-[70px] md:pt-[186px] pb-[40px] md:pb-[0px] bg-cover"
-      >
-        <p className="text-[white] text-[28px] md:text-[64px] font-semibold font-[Poppins] pb-[32px]">
+        className={
+          "h-[auto] md:h-[70vh] bg-cover w-[100%] md:w-full px-[20px] md:px-[0px] pb-[50px]"
+        } >
+        {/* <p className="text-[white] text-[28px] md:text-[64px] font-semibold font-[Poppins] pb-[32px]">
           {bannerData?.title}
-        </p>
-      </div> */}
-      <Carousel afterChange={onChange} arrows infinite={false}>
+        </p> */}
+      </div>
+      {/* <Carousel afterChange={onChange} arrows infinite={false}>
         {Array.isArray(bannerData) && bannerData.map((el)=> (
           <div>
             <div
@@ -181,7 +192,7 @@ console.log(bannerData, "ini banner data")
               }
             >
               <div
-                className={`md:w-[50%] relative left-[0px] md:left-[80px] ${
+                className={`md:w-[35%] relative left-[0px] md:left-[80px] ${
                   el?.desc === null || el.desc === ""
                     ? "pt-[100px] md:pt-[280px]"
                     : "top-[40px] md:top-[100px]"
@@ -191,7 +202,7 @@ console.log(bannerData, "ini banner data")
                   {el?.title}
                 </div>
                 {el?.desc === null && el.desc === "" ? null : (
-                  <p className="text-justify font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[24px] text-[white] pb-[32px]">
+                  <p className="font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[24px] text-[white] pb-[32px]">
                     {el?.desc}
                   </p>
                 )}
@@ -220,7 +231,19 @@ console.log(bannerData, "ini banner data")
             </div>
           </div>
         ))}
-      </Carousel>
+      </Carousel> */}
+      <div className="w-100% py-[50px] bg-[white] ">
+      <div className="m-auto block w-[70%] border-b-[2px] border-b-[#C7C7CC] border-b-solid">
+          <p className="text-[#00695c] font-[Poppins] text-center text-[26px] md:text-[40px] leading-[32px] font-bold pt-[32px] pb-[14px] md:pb-[32px]">
+            {img?.title}
+          </p>
+          <p className="text-[#374354] font-[Poppins] text-justify md:text-center text-[14px] md:text-[20px] leading-[32px] font-normal pt-[20px] md:pt-[32px] pb-[32px]">
+            {img?.desc}
+          </p>
+
+          
+        </div>
+      </div>
       <div className="px-[20px] md:px-[80px] pt-[10px] md:pt-[80px] bg-[#F8F8F8] pb-[30px]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="pb-[0px] md:pb-[32px] px-[24px] pt-[10%] md:pt-[3%]">

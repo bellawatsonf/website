@@ -102,7 +102,12 @@ export default function HeaderView(params) {
                   </li>
                 </ul>
               </li> */}
-
+              <li
+                className="pr-[40px] hover:cursor-pointer"
+                onClick={() => navigate("/galery")}
+              >
+                Galeri
+              </li>
               <li
                 className="pr-[40px] hover:cursor-pointer"
                 onClick={() => navigate("/contact-us")}
@@ -204,6 +209,17 @@ export default function HeaderView(params) {
                 </ul>
               </li> */}
               {/* <li className="pr-[40px] hover:cursor-pointer" onClick={()=>navigate('/')}>General Kontraktor</li> */}
+              <li
+                className="pr-[40px] hover:cursor-pointer font-[Poppins] text-[20px] py-[10px] text-[#00695c]"
+                onClick={() => {
+                  if (open === "open") {
+                    setopen("close");
+                  }
+                  navigate("/galery");
+                }}
+              >
+                Galeri
+              </li>
               <li
                 className="pr-[40px] hover:cursor-pointer font-[Poppins] text-[20px] py-[10px] text-[#00695c]"
                 onClick={() => {

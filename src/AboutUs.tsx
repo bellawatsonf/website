@@ -145,7 +145,7 @@ export default function AboutUs() {
                 }
               >
                 <div
-                  className={`md:w-[35%] relative left-[0px] md:left-[80px] ${
+                  className={`md:w-[50%] relative left-[0px] md:left-[80px] ${
                     el?.desc === null || el.desc === ""
                       ? "pt-[100px] md:pt-[280px]"
                       : "top-[40px] md:top-[100px]"
@@ -155,7 +155,7 @@ export default function AboutUs() {
                     {el?.title}
                   </div>
                   {el?.desc === null && el.desc === "" ? null : (
-                    <p className="font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[24px] text-[white] pb-[32px]">
+                    <p className="text-justify font-[Poppins] text-[14px] md:text-[20px] font-normal leading-[24px] text-[white] pb-[32px]">
                       {el?.desc}
                     </p>
                   )}
@@ -200,7 +200,7 @@ export default function AboutUs() {
           />
         </div>
         <div className="pt-[50px] md:pt-[100px]">
-          <p className="text-[#0056B3] font-[Poppins] text-center text-[22px] md:text-[40px] leading-[32px] font-sembibold pb-[60px]">
+          <p className="text-[#00695c] font-[Poppins] text-center text-[22px] md:text-[40px] leading-[32px] font-sembibold pb-[60px]">
             {aboutData?.title_card_section}
           </p>
 
@@ -234,7 +234,7 @@ export default function AboutUs() {
                   show === true && i === openId ? "h-[400px]" : "h-auto"
                 }  rounded-md bg-[#d3d3d3] relative `}
               >
-                <div className="bg-[#0056B3] rounded-t-md pt-[26px] pb-[16px] h-[auto] md:h-[200px]">
+                <div className="bg-[#4db6ac] rounded-t-md pt-[26px] pb-[16px] h-[auto] md:h-[200px]">
                   <p className="text-[white] font-[Poppins] text-center text-[16px] h-[auto] md:h-[70px] md:text-[20px] leading-[32px] font-sembibold px-[10px] ">
                     {el?.name}
                   </p>
@@ -269,7 +269,7 @@ export default function AboutUs() {
                     <p
                       className={`${
                         show === true && i === openId ? "block" : "hidden"
-                      } text-[#696969] font-[Poppins] text-center text-[14px] md:text-[16px] leading-[32px] font-sembibold pb-[60px]`}
+                      } text-[#4db6ac] font-[Poppins] text-center text-[14px] md:text-[16px] leading-[32px] font-semibold pb-[60px]`}
                     >
                       {el.desc}
                     </p>
