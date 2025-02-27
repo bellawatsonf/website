@@ -8,7 +8,7 @@ import OurClientComponent from "./components/OurClient";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import img from "./assets/ContactUs.svg";
+
 
 type BannerData = {
   desc: string;
@@ -25,6 +25,7 @@ type HomeData = {
   title_desc_section: string;
   desc_section: string;
   ruang_lingkup: string;
+  image_url:string;
 };
 
 type GridItem = {
@@ -259,11 +260,14 @@ export default function Home() {
               Selengkapnya
             </Button>
           </div>
-          <div className="order-1 md:order-2 md:col-span-2 flex justify-center">
+          <div className="order-1 md:order-2 md:col-span-2 flex justify-center items-center">
+            <div className="w-full ml-[0px] md:ml-[70px] ">
             <img
-              src={img}
-              className="rounded-[20px] w-full max-w-[300px] md:max-w-[400px]"
+              src={homeData?.image_url}
+              className="rounded-[20px] md:h-[350px]"
             />
+            </div>
+          
           </div>
         </div>
       </div>
