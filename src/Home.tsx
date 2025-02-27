@@ -204,7 +204,7 @@ export default function Home() {
           </Button>
         </div>
       </div> */}
-      <Carousel afterChange={onChange} arrows infinite={false}>
+      <Carousel afterChange={onChange} arrows autoplay autoplaySpeed={2500}>
         {Array.isArray(bannerData) &&
           bannerData.map((el) => (
             <div>
